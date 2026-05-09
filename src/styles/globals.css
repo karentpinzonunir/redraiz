@@ -1,0 +1,28 @@
+:root {
+  --page-color: #341113;
+  --primary-color: #006D2E;
+  --secondary-color: #53C751;
+  --accent-color: #9ECC37;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.5;
+  background: white;
+  color: black;
+}
+
+h1{
+  font-family: 'DM Sans', sans-serif;font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 3rem); 
+  text-align: center;
+  color: var(--page-color);
+  letter-spacing: -0.03em;
+  margin: 0;
+}

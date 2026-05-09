@@ -1,0 +1,33 @@
+.btn:disabled {
+    color: var(--bs-btn-disabled-color);
+    pointer-events: none;
+    background-color: var(--bs-btn-disabled-bg);
+    border-color: var(--bs-btn-disabled-border-color);
+    opacity: var(--bs-btn-disabled-opacity);
+}
+
+.btn--primario {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    color: white;
+    transition: background-color color 0.4s ease;
+}
+
+.btn--primario:hover:not(:disabled) {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.btn--secundario {
+    background-color: white;
+    border: 1px solid var(--page-color);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    color: var(--page-color);
+    transition: background-color color 0.4s ease;
+}
+
+.btn--secundario:hover:not(:disabled) {
+    background-color: var(--page-color);
+    color: white;
+}
