@@ -17,6 +17,7 @@
 .btn--primario:hover:not(:disabled) {
     background-color: white;
     color: var(--primary-color);
+    border: 1px solid var(--primary-color);
 }
 
 .btn--secundario {
