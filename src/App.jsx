@@ -1,31 +1,80 @@
+import React from "react";
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import Footer from "./components/Footer";
+import "./styles/globals.css";
+import "./styles/header.css";
+import "./styles/productores.css";
+
+/* COMPONENTES */
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+/* PAGINAS */
 import Home from "./pages/Home";
-import Productores from "./pages/Productores";
-import Catalogo from "./pages/Catalogo";
 import Blog from "./pages/Blog";
-import './styles/globals.css';
-import './styles/header.css';
+import Catalogo from "./pages/Catalogo";
+import Productores from "./pages/Productores";
+import ProductorDetalle from "./pages/ProductorDetalle";
+import Contacto from "./pages/Contacto";
 
 function App() {
-  return (
 
+  return (
     <Router>
-      <header className="fixed-top">
-        <Header />
-      </header>
-      <Container className="mt-5 pt-5 pb-3">
+
+      {/* HEADER */}
+      <Header />
+
+      {/* CONTENIDO */}
+      <main className="main-content">
+
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/productores" element={<Productores />} />
-          <Route path="/catalogo" element={<Catalogo />} />
-          <Route path="/blog" element={<Blog />} />
+
+          <Route
+            path="/"
+            element={<Home />}
+          />
+
+          <Route
+            path="/blog"
+            element={<Blog />}
+          />
+
+          <Route
+            path="/catalogo"
+            element={<Catalogo />}
+          />
+
+          <Route
+            path="/productores"
+            element={<Productores />}
+          />
+
+          <Route
+            path="/productores/:id"
+            element={<ProductorDetalle />}
+          />
+
+          <Route
+            path="/contacto"
+            element={<Contacto />}
+          />
+
         </Routes>
-      </Container>
+
+      </main>
+
+      {/* FOOTER */}
       <Footer />
+
     </Router>
   );
 }

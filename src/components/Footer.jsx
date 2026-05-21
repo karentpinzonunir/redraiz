@@ -1,42 +1,124 @@
-// src/components/layout/Footer.jsx
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import '../styles/footer.css';
+
+import {
+  FiInstagram,
+  FiLinkedin,
+} from "react-icons/fi";
+
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
+
   return (
-    <footer className="footer py-5 text-white">
-      <Container>
-        <Row className="gx-4 gy-4 align-items-start">
-          <Col md={4}>
-            <h3 className="mb-2 fw-bold text-uppercase">RED RAIZ</h3>
-            <p className="mb-3" style={{ maxWidth: 360 }}>
+    <footer className="footer">
+
+      <div className="container-custom">
+
+        <div className="footer-grid">
+
+          {/* INFO */}
+          <div>
+
+            <h3 className="footer-logo">
+              RED RAIZ
+            </h3>
+
+            <p className="footer-description">
               La raíz de todo empieza en el campo.
             </p>
 
-            
-          </Col>
+            <div className="footer-socials">
 
-          <Col md={4}>
-            <h6 className="fw-bold">Contacto</h6>
-            <ul className="list-unstyled mb-0">
-              <li>Email: <a className="text-white" href="mailto:info@nexus.com">info@nexus.com</a></li>
-              <li>Tel: <span className="d-block">+57 310 555 8899</span></li>
-              <li>Dirección: <span className="d-block">Calle 21 #45-17, Aranjuez</span></li>
-            </ul>
-          </Col>
+              <FiInstagram />
 
-          <Col md={4}>
-            <h6 className="fw-bold">Contenido</h6>
-            <ul className="list-unstyled mb-0">
-              <li><a className="text-white" href="#">Inicio</a></li>
-              <li><a className="text-white" href="#">Productores</a></li>
-              <li><a className="text-white" href="#">Catálogo</a></li>
-              <li><a className="text-white" href="#">Blog</a></li>
+              <FiLinkedin />
+
+              <FaXTwitter />
+
+            </div>
+
+          </div>
+
+          {/* CONTACTO */}
+          <div>
+
+            <h5>
+              Contacto
+            </h5>
+
+            <ul>
+
+              <li>
+                Email:
+                info@nexus.com
+              </li>
+
+              <li>
+                Teléfono:
+                <br />
+                +57 310 555 8899
+              </li>
+
+              <li>
+                Dirección:
+                Calle 21
+                <br />
+                #45-17, Aranjuez
+              </li>
+
             </ul>
-          </Col>
-        </Row>
-      </Container>
+
+          </div>
+
+          {/* CONTENIDO */}
+          <div>
+
+            <h5>
+              Contenido
+            </h5>
+
+            <ul>
+
+              <li>Catálogo</li>
+
+              <li>Co-working</li>
+
+              <li>Tienda</li>
+
+              <li>Novedades</li>
+
+            </ul>
+
+          </div>
+
+          {/* SOPORTE */}
+          <div>
+
+            <h5>
+              Soporte
+            </h5>
+
+            <ul>
+
+              <li>Contacto</li>
+
+              <li>
+                Horario:
+                <br />
+                Lunes a Sábado
+                9:00am - 6:00pm
+              </li>
+
+              <li>Legal</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </footer>
   );
 };
