@@ -1,18 +1,10 @@
 import React from "react";
-
 import { useParams } from "react-router-dom";
-
-import {
-  Row,
-  Col,
-  Button,
-} from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import { productores } from "../data/productores";
-
 import ProductCard from "../components/ProductCard";
-
-import ImageCarousel from "../components/ImageCarousel";
+import ContactForm from "../components/Contactform";
 
 const ProductorDetalle = () => {
 
@@ -23,25 +15,72 @@ const ProductorDetalle = () => {
   );
 
   if (!productor) {
-    return <h2>Productor no encontrado</h2>;
+    return (
+      <div className="container-custom section-spacing">
+        <h2>Productor no encontrado</h2>
+      </div>
+    );
   }
 
   return (
     <div className="productor-detalle-page">
 
-      {/* HERO */}
-      <section className="productor-hero">
+      {/* TITULO */}
+      <section className="producer-title-section">
+
+        <div className="container-custom">
+
+          <span className="section-tag">
+            Historias del campo
+          </span>
+
+          <h1 className="section-title">
+            Cada fruto lleva tiempo, esfuerzo y esperanza
+          </h1>
+
+          <p className="section-description">
+            Conoce a quienes cultivan con dedicación los alimentos
+            que llegan diariamente a los hogares colombianos.
+          </p>
+
+        </div>
+
+      </section>
+
+      {/* INFORMACION */}
+      <section className="producer-info-section">
 
         <div className="container-custom">
 
           <Row className="align-items-center g-5">
 
-            {/* IMAGEN */}
+            {/* GALERIA */}
             <Col lg={6}>
 
-              <ImageCarousel
-                images={productor.galeria}
-              />
+              <div className="producer-gallery">
+
+                <img
+                  src={productor.galeria[0]}
+                  alt={productor.nombre}
+                  className="main-producer-image"
+                />
+
+                <div className="gallery-thumbnails">
+
+                  {productor.galeria.map((img, index) => (
+
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`foto-${index}`}
+                      className="thumbnail-image"
+                    />
+
+                  ))}
+
+                </div>
+
+              </div>
 
             </Col>
 
@@ -52,29 +91,26 @@ const ProductorDetalle = () => {
                 Productor verificado
               </span>
 
-              <h1 className="mt-4">
+              <h2 className="producer-name">
                 {productor.nombre}
-              </h1>
+              </h2>
 
-              <h5 className="producer-category mt-4">
+              <h5 className="producer-category">
                 {productor.categoria}
               </h5>
 
-              <p className="producer-history mt-4">
+              <p className="producer-history">
                 {productor.historia}
               </p>
 
-              <div className="d-flex gap-3 mt-4 flex-wrap">
-
-                <Button className="btn-green">
-                  Contactar
-                </Button>
-
-                <Button variant="outline-dark">
-                  Ver catálogo
-                </Button>
-
-              </div>
+              <a
+                href={`https://wa.me/57${productor.telefono}`}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-green producer-whatsapp"
+              >
+                Escríbeme por WhatsApp
+              </a>
 
             </Col>
 
@@ -89,26 +125,81 @@ const ProductorDetalle = () => {
 
         <div className="container-custom">
 
-          <div className="section-spacing">
+          <div className="text-center mb-5">
 
-            <Row className="g-4">
+            <span className="section-tag">
+              Productos
+            </span>
 
-              {productor.productos.map((producto, index) => (
+            <h2 className="section-title">
+              Elige tu producto ideal
+            </h2>
 
-                <Col
-                  lg={4}
-                  key={index}
-                >
-
-                  <ProductCard producto={producto} />
-
-                </Col>
-
-              ))}
-
-            </Row>
+            <p className="section-description">
+              Productos frescos cultivados directamente por este productor.
+            </p>
 
           </div>
+
+          <Row className="g-4">
+
+            {productor.productos.map((producto, index) => (
+
+              <Col
+                lg={4}
+                md={6}
+                key={index}
+              >
+                <ProductCard producto={producto} />
+              </Col>
+
+            ))}
+
+          </Row>
+
+        </div>
+
+      </section>
+
+      {/* MAPA */}
+      <section className="producer-map-section">
+
+        <div className="container-custom">
+
+          <div className="text-center mb-5">
+
+            <span className="section-tag">
+              Ubicación
+            </span>
+
+            <h2 className="section-title">
+              Estamos ubicados aquí
+            </h2>
+
+          </div>
+
+          <iframe
+            title="Mapa"
+            src="https://maps.google.com/maps?q=bogota&t=&z=10&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="500"
+            style={{
+              border: 0,
+              borderRadius: "24px"
+            }}
+            loading="lazy"
+          />
+
+        </div>
+
+      </section>
+
+      {/* CONTACTO */}
+      <section className="section-spacing">
+
+        <div className="container-custom">
+
+          <ContactForm />
 
         </div>
 

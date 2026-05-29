@@ -9,9 +9,17 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
+
+/* ESTILOS */
 import "./styles/globals.css";
 import "./styles/header.css";
+import "./styles/footer.css";
+import "./styles/home.css";
+import "./styles/carousel.css";
+import "./styles/buttons.css";
 import "./styles/productores.css";
+import "./styles/catalogo.css";
+import "./styles/blog.css";
 
 /* COMPONENTES */
 import Header from "./components/Header";
@@ -26,14 +34,11 @@ import ProductorDetalle from "./pages/ProductorDetalle";
 import Contacto from "./pages/Contacto";
 
 function App() {
-
   return (
     <Router>
 
-      {/* HEADER */}
       <Header />
 
-      {/* CONTENIDO */}
       <main className="main-content">
 
         <Routes>
@@ -41,16 +46,6 @@ function App() {
           <Route
             path="/"
             element={<Home />}
-          />
-
-          <Route
-            path="/blog"
-            element={<Blog />}
-          />
-
-          <Route
-            path="/catalogo"
-            element={<Catalogo />}
           />
 
           <Route
@@ -64,6 +59,16 @@ function App() {
           />
 
           <Route
+            path="/catalogo"
+            element={<Catalogo />}
+          />
+
+          <Route
+            path="/blog"
+            element={<Blog />}
+          />
+
+          <Route
             path="/contacto"
             element={<Contacto />}
           />
@@ -72,7 +77,6 @@ function App() {
 
       </main>
 
-      {/* FOOTER */}
       <Footer />
 
     </Router>
