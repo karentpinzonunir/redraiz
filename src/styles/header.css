@@ -1,4 +1,86 @@
 header {
   background-color: var(--page-color);
-  color: white; 
+  color: white;
+
+  .logo-header {
+    width: 170px;
+  }
+
+  .menu {
+    .nav-link {
+      position: relative;
+      letter-spacing: 0.3px;
+      color: white;
+      transition: color 0.3s ease;
+
+      &:hover,
+      &:focus,
+      &.active {
+        color: var(--accent-color);
+
+        &::after {
+          transform: scaleX(1);
+        }
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 1px;
+        height: 2px;
+        background: var(--accent-color);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+
+  .header-search.input-group {
+    width: 240px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    padding: 0 5px;
+    border: none;
+
+    .search-icon-wrapper {
+      background: transparent;
+      border: none;
+      color: white;
+      padding-left: 10px;
+      padding-right: 0;
+
+      .search-icon {
+        font-size: 16px;
+        opacity: 0.85;
+      }
+    }
+
+    .search-input.form-control {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 14px;
+      box-shadow: none;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      &:focus {
+        background: transparent;
+        color: white;
+      }
+    }
+
+    &:focus-within {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+  }
 }

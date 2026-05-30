@@ -5,7 +5,7 @@ const ButtonSecondary = ({ children, className = "", ...props }) => {
   return (
     <Button
       variant="" 
-      className={`rounded-pill ms-3 px-4 btn btn--secundario ${className}`.trim()}
+      className={`rounded-pill px-4 btn btn--secundario ${className}`.trim()}
       {...props}
     >
       {children}

@@ -1,0 +1,23 @@
+.contact-form-box {
+  background: white;
+
+  padding: 70px;
+
+  border-radius: 36px;
+
+  box-shadow: 0 10px 35px rgba(0,0,0,0.05);
+}
+
+.contact-form-box input,
+.contact-form-box textarea,
+.contact-form-box select {
+  border-radius: 16px !important;
+
+  min-height: 58px;
+
+  border: 1px solid #ddd;
+}
+
+.contact-form-box textarea {
+  min-height: 180px;
+}

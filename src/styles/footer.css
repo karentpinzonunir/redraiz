@@ -1,4 +1,120 @@
-footer {
-  background-color: var(--page-color);
-  color: white; 
+.footer {
+  background: #4d000d;
+
+  padding: 90px 0;
+
+  margin-top: 100px;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+.footer::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image: url('/assets/fondo.png');
+
+  background-size: 700px;
+
+  opacity: 0.03;
+
+  pointer-events: none;
+}
+
+.footer-grid {
+  display: grid;
+
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+
+  gap: 80px;
+
+  align-items: flex-start;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.footer-logo {
+  color: white;
+
+  font-size: 54px;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+}
+
+.footer-description {
+  color: white;
+
+  opacity: 0.9;
+
+  margin-top: 18px;
+
+  line-height: 1.8;
+
+  font-size: 18px;
+
+  max-width: 260px;
+}
+
+.footer-socials {
+  display: flex;
+
+  gap: 18px;
+
+  margin-top: 28px;
+}
+
+.footer-socials svg {
+  color: white;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.footer-socials svg:hover {
+  transform: translateY(-3px) scale(1.05);
+
+  opacity: 0.8;
+}
+
+.footer h5 {
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  margin-bottom: 24px;
+}
+
+.footer ul {
+  list-style: none;
+
+  padding: 0;
+}
+
+.footer li {
+  color: white;
+
+  opacity: 0.85;
+
+  line-height: 2.1;
+}
+
+/* EFECTO SUAVE EN SECCIONES */
+section {
+  position: relative;
+
+  z-index: 2;
 }

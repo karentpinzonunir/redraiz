@@ -1,0 +1,313 @@
+.productores-page {
+  background: #f5f5f5;
+}
+
+/* HERO */
+.hero-productores {
+  padding-top: 50px;
+
+  padding-bottom: 80px;
+
+  text-align: center;
+}
+
+.hero-productores .section-description {
+  max-width: 760px;
+
+  margin-left: auto;
+
+  margin-right: auto;
+}
+
+/* GRID */
+.productores-grid-section {
+  padding-bottom: 120px;
+}
+
+/* CARD */
+.producer-card {
+  border: none !important;
+
+  border-radius: 28px !important;
+
+  overflow: hidden;
+
+  background: white;
+
+  box-shadow: 0 10px 35px rgba(0,0,0,0.05);
+
+  transition: .4s ease;
+}
+
+.producer-card:hover {
+  transform: translateY(-10px);
+}
+
+.producer-image-wrapper {
+  width: 100%;
+
+  height: 460px;
+
+  overflow: hidden;
+}
+
+.producer-image {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: .5s ease;
+}
+
+.producer-card:hover .producer-image {
+  transform: scale(1.05);
+}
+
+.producer-card .card-body {
+  padding: 28px;
+}
+
+.producer-region {
+  color: #0d7a34;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+.producer-card .card-title {
+  font-size: 24px;
+
+  font-weight: 800;
+
+  line-height: 1.25;
+
+  margin-top: 14px;
+
+  min-height: 62px;
+}
+
+.producer-category {
+  color: #444;
+
+  font-weight: 600;
+
+  margin-top: 12px;
+}
+
+.producer-card p {
+  color: #666;
+
+  line-height: 1.8;
+
+  margin-top: 16px;
+
+  min-height: 78px;
+}
+
+.producer-link {
+  text-decoration: none;
+}
+
+.producer-btn {
+  margin-top: 18px;
+
+  width: 100%;
+
+  height: 54px;
+
+  border-radius: 50px !important;
+
+  font-size: 14px !important;
+
+  font-weight: 700 !important;
+}
+
+/* DETALLE */
+.productor-hero {
+  padding-top: 160px;
+
+  padding-bottom: 120px;
+}
+
+.carousel-image {
+  width: 100%;
+
+  height: 720px;
+
+  object-fit: cover;
+
+  border-radius: 36px;
+}
+
+.producer-history {
+  color: #555;
+
+  font-size: 18px;
+
+  line-height: 1.9;
+}
+
+.products-section {
+  padding-bottom: 120px;
+}
+
+/* CONTACTO */
+.contact-page {
+  background: #f5f5f5;
+}
+
+.contact-hero {
+  padding-top: 60px;
+
+  padding-bottom: 80px;
+
+  text-align: center;
+}
+
+.contact-form-section {
+  padding-bottom: 120px;
+}
+
+.contact-form-box {
+  background: white;
+
+  padding: 70px;
+
+  border-radius: 36px;
+
+  box-shadow: 0 10px 35px rgba(0,0,0,0.05);
+}
+
+.contact-form-box input,
+.contact-form-box textarea,
+.contact-form-box select {
+  border-radius: 16px !important;
+
+  min-height: 58px;
+
+  border: 1px solid #ddd;
+}
+
+.contact-form-box textarea {
+  min-height: 180px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+
+  .producer-image-wrapper {
+    height: 380px;
+  }
+
+  .carousel-image {
+    height: 520px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .hero-productores {
+    padding-top: 140px;
+  }
+
+  .producer-image-wrapper {
+    height: 340px;
+  }
+
+  .carousel-image {
+    height: 420px;
+  }
+
+  .contact-form-box {
+    padding: 35px;
+  }
+
+}
+/* ===== PRODUCTOR DETALLE ===== */
+
+.producer-title-section{
+  padding: 60px 0 70px;
+}
+
+.producer-info-section{
+  padding-bottom: 120px;
+}
+
+.producer-gallery{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.main-producer-image{
+  width:100%;
+  height:600px;
+  object-fit:cover;
+  border-radius:24px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+
+.gallery-thumbnails{
+  display:flex;
+  gap:15px;
+}
+
+.thumbnail-image{
+  width:110px;
+  height:110px;
+  object-fit:cover;
+  border-radius:16px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.thumbnail-image:hover{
+  transform:scale(1.05);
+}
+
+.producer-name{
+  font-size:3rem;
+  font-weight:800;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.producer-category{
+  color:#0d7a34;
+  font-weight:600;
+  margin-bottom:25px;
+}
+
+.producer-history{
+  font-size:1.1rem;
+  line-height:1.9;
+  color:#555;
+  margin-bottom:30px;
+}
+
+.producer-whatsapp{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+}
+
+.products-section{
+  padding:120px 0;
+}
+
+.producer-map-section{
+  padding:120px 0;
+}
+
+.producer-map-section iframe{
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+}

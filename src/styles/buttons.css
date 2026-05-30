@@ -8,26 +8,29 @@
 
 .btn--primario {
     background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    border: none;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 0 8px rgba(var(--primary-color), 0.15);
     color: white;
-    transition: background-color color 0.4s ease;
-}
-
-.btn--primario:hover:not(:disabled) {
-    background-color: white;
-    color: var(--primary-color);
 }
 
 .btn--secundario {
-    background-color: white;
-    border: 1px solid var(--page-color);
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-    color: var(--page-color);
-    transition: background-color color 0.4s ease;
+    background-color: var(--accent-color);
+    border: none;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 0 8px rgba(var(--accent-color), 0.15);
+    color: white;
 }
 
-.btn--secundario:hover:not(:disabled) {
-    background-color: var(--page-color);
-    color: white;
+.btn--primario:hover:not(:disabled),
+.btn--primario:focus:not(:disabled),
+.btn--primario:active:not(:disabled),
+.btn--secundario:hover:not(:disabled),
+.btn--secundario:focus:not(:disabled),
+.btn--secundario:active:not(:disabled) {
+    background-color: var(--secondary-color);
+    color: black;
+    transform: translateY(-2px);
 }

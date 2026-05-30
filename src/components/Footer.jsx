@@ -1,42 +1,109 @@
-// src/components/layout/Footer.jsx
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import '../styles/footer.css';
+import { Link } from "react-router-dom";
+import "../styles/footer.css";
 
 const Footer = () => {
   return (
-    <footer className="footer py-5 text-white">
-      <Container>
-        <Row className="gx-4 gy-4 align-items-start">
-          <Col md={4}>
-            <h3 className="mb-2 fw-bold text-uppercase">RED RAIZ</h3>
-            <p className="mb-3" style={{ maxWidth: 360 }}>
+    <footer className="footer">
+
+      <div className="container">
+
+        <div className="footer-grid">
+
+          {/* LOGO */}
+          <div>
+
+            <Link
+              to="/"
+              className="logo"
+            >
+              <img
+                src="/assets/logos/logo-red-raiz.png"
+                width="150px"
+                alt="RedRaíz"
+                className="footer-logo-image"
+              />
+            </Link>
+
+            <p className="footer-description">
               La raíz de todo empieza en el campo.
             </p>
 
-            
-          </Col>
+          </div>
 
-          <Col md={4}>
-            <h6 className="fw-bold">Contacto</h6>
-            <ul className="list-unstyled mb-0">
-              <li>Email: <a className="text-white" href="mailto:info@nexus.com">info@nexus.com</a></li>
-              <li>Tel: <span className="d-block">+57 310 555 8899</span></li>
-              <li>Dirección: <span className="d-block">Calle 21 #45-17, Aranjuez</span></li>
-            </ul>
-          </Col>
+          {/* CONTACTO */}
+          <div>
 
-          <Col md={4}>
-            <h6 className="fw-bold">Contenido</h6>
-            <ul className="list-unstyled mb-0">
-              <li><a className="text-white" href="#">Inicio</a></li>
-              <li><a className="text-white" href="#">Productores</a></li>
-              <li><a className="text-white" href="#">Catálogo</a></li>
-              <li><a className="text-white" href="#">Blog</a></li>
+            <h5>Contacto</h5>
+
+            <ul>
+              <li>contacto@redraiz.com</li>
+              <li>+57 300 123 4567</li>
+              <li>Colombia</li>
             </ul>
-          </Col>
-        </Row>
-      </Container>
+
+          </div>
+
+          {/* CONTENIDO */}
+          <div>
+
+            <h5>Contenido</h5>
+
+            <ul>
+              <li>
+                <Link to="/">
+                  Inicio
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/productores">
+                  Productores
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/catalogo">
+                  Catálogo
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/blog">
+                  Blog
+                </Link>
+              </li>
+            </ul>
+
+          </div>
+
+          {/* SOPORTE */}
+          <div>
+
+            <h5>Soporte</h5>
+
+            <ul>
+              <li>
+                <Link to="/contacto">
+                  Contacto
+                </Link>
+              </li>
+
+              <li>
+                Política de privacidad
+              </li>
+
+              <li>
+                Términos y condiciones
+              </li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </footer>
   );
 };
