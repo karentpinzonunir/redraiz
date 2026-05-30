@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer">
 
-      <div className="container-custom">
+      <div className="container">
 
         <div className="footer-grid">
 
@@ -18,7 +18,8 @@ const Footer = () => {
               className="logo"
             >
               <img
-                src="/assets/logo-red-raiz.png"
+                src="/assets/logos/logo-red-raiz.png"
+                width="150px"
                 alt="RedRaíz"
                 className="footer-logo-image"
               />

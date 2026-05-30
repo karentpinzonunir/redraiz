@@ -5,6 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import { productores } from "../data/productores";
 import ProductCard from "../components/ProductCard";
 import ContactForm from "../components/Contactform";
+import ButtonSecondary from '../components/ButtonSecondary';
 
 const ProductorDetalle = () => {
 
@@ -17,7 +18,7 @@ const ProductorDetalle = () => {
   if (!productor) {
     return (
       <div className="container-custom section-spacing">
-        <h2>Productor no encontrado</h2>
+        <h2>Productor no encontrado - {id}</h2>
       </div>
     );
   }
@@ -102,15 +103,9 @@ const ProductorDetalle = () => {
               <p className="producer-history">
                 {productor.historia}
               </p>
-
-              <a
-                href={`https://wa.me/57${productor.telefono}`}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-green producer-whatsapp"
-              >
+              <ButtonSecondary >
                 Escríbeme por WhatsApp
-              </a>
+              </ButtonSecondary>
 
             </Col>
 

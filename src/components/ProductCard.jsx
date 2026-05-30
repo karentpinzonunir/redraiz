@@ -1,5 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import ButtonSecondary from './ButtonSecondary';
+import "../styles/catalogo.css";
 
 const ProductCard = ({ producto }) => {
   return (
@@ -17,9 +19,9 @@ const ProductCard = ({ producto }) => {
           {producto.precio}
         </h5>
 
-        <Button className="btn-green w-100 mt-4">
-          Reservar
-        </Button>
+        <ButtonSecondary >
+          Contactar
+        </ButtonSecondary>
 
       </Card.Body>
 

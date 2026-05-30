@@ -1,5 +1,7 @@
 import React from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
+import ButtonPrimary from './ButtonPrimary';
+import '../styles/contacto.css';
 
 const ContactForm = () => {
   return (
@@ -76,10 +78,12 @@ const ContactForm = () => {
             />
           </Col>
 
-          <Col xs={12}>
-            <Button className="btn-green w-100 py-3">
-              Quiero unirme a RedRaíz
-            </Button>
+          <Col xs={12} className="text-center">
+            <div className="mt-3">
+              <ButtonPrimary >
+                Quiero unirme a RedRaíz
+              </ButtonPrimary>
+            </div>
           </Col>
 
         </Row>

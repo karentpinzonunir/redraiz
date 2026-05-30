@@ -1,106 +1,31 @@
-import React from "react";
-import "../styles/home.css";
-
-import HeroSection from "../components/HeroSection";
-import ImageCarousel from "../components/ImageCarousel";
+import React from 'react';
+import { Image } from 'react-bootstrap';
+import Slider from "../components/Slider";
 import SectionTitle from "../components/SectionTitle";
+import CardCarousel from "../components/CardCarousel";
 import ContactForm from "../components/Contactform";
-
-const historias = [
-  {
-    nombre: "Gracias campesino",
-    region: "Colombia",
-    imagen: "/assets/img1.jpg",
-    historia:
-      "Gracias por sembrar esperanza en cada cosecha y llevar alimento fresco a millones de hogares colombianos.",
-  },
-
-  {
-    nombre: "Manos que alimentan",
-    region: "Campo colombiano",
-    imagen: "/assets/img2.jpg",
-    historia:
-      "Detrás de cada alimento hay esfuerzo, dedicación y amor por la tierra.",
-  },
-
-  {
-    nombre: "Sembrando futuro",
-    region: "Colombia",
-    imagen: "/assets/img3.jpg",
-    historia:
-      "Cada semilla cultivada representa oportunidades para las futuras generaciones.",
-  },
-
-  {
-    nombre: "Orgullo campesino",
-    region: "RedRaíz",
-    imagen: "/assets/img4.jpg",
-    historia:
-      "El campo colombiano es fuerza, tradición y el corazón de nuestro país.",
-  },
-];
+import banner from '/assets/home/banner.png';
+import '../styles/comunidad.css';
 
 const Home = () => {
   return (
-    <div className="home-page">
-
-      {/* INTRODUCCIÓN */}
-      <section className="home-intro">
-
-        <div className="container-custom">
-
-          <span className="section-tag">
-            REDRAÍZ
-          </span>
-
-          <h1>
-            Alimenta tu hogar con propósito y con alma
-          </h1>
-
-          <p>
-            Cuando compras al campesino, siembras esperanza.
-          </p>
-
-        </div>
-
+    <div>
+      <section className="py-5">
+        <Slider />
       </section>
-
-      {/* HERO */}
-      <HeroSection />
-
-      {/* BANNER */}
-      <section className="banner-section">
-
-        <div className="container-custom">
-
-          <img
-            src="/assets/BANNER.png"
-            alt="Productos sin intermediarios"
-            className="home-banner"
-          />
-
-        </div>
-
+      <section className="py-5">
+        <Image
+          src={banner} alt="Banner" fluid className="rounded-5"
+        />
       </section>
-
-      {/* HISTORIAS DEL CAMPO */}
-      <section className="section-spacing">
-
-        <div className="container-custom">
-
-          <SectionTitle
-            tag="Historias del campo"
-            title="Gracias por alimentar a Colombia"
-            description="Cada cosecha es una muestra de esfuerzo, dedicación y amor por la tierra."
-            center
-          />
-
-          <ImageCarousel
-            stories={historias}
-          />
-
-        </div>
-
+      <section className="py-5">
+        <SectionTitle
+          tag="Historias del campo"
+          title="Gracias por alimentar a Colombia"
+          description="Cada cosecha es una muestra de esfuerzo, dedicación y amor por la tierra."
+          center
+        />
+        <CardCarousel interval={6000} />
       </section>
 
       {/* COMUNIDAD */}
@@ -113,7 +38,7 @@ const Home = () => {
             <div>
 
               <img
-                src="/assets/img7.jpg"
+                src="/assets/carousel/img7.jpg"
                 alt="Comunidad RedRaíz"
                 className="community-image"
               />
@@ -147,15 +72,14 @@ const Home = () => {
       {/* CONTACTO */}
       <section className="section-spacing">
 
-        <div className="container-custom">
+        <div className="w-75 mx-auto">
 
           <ContactForm />
 
         </div>
 
       </section>
-
-    </div>
+    </div >
   );
 };
 

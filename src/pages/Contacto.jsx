@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap";
 
 import SectionTitle from "../components/SectionTitle";
+import ButtonPrimary from '../components/ButtonPrimary';
 
 const Contacto = () => {
 
@@ -97,11 +98,11 @@ const Contacto = () => {
 
                     <Col xs={12}>
 
-                      <Button className="btn-green w-100">
-
-                        Quiero unirme a RedRaíz
-
-                      </Button>
+                      <div className="mt-3 text-center">
+                        <ButtonPrimary >
+                          Quiero unirme a RedRaíz
+                        </ButtonPrimary>
+                      </div>
 
                     </Col>
 

@@ -1,78 +1,95 @@
-import React from "react";
-
-import { Link } from "react-router-dom";
-
-import { FiSearch } from "react-icons/fi";
+import { useState } from "react";
+import {
+  Navbar,
+  Nav,
+  Container,
+  InputGroup,
+  FormControl,
+  Image,
+} from "react-bootstrap";
+import { NavLink, useNavigate } from "react-router-dom";
+import ButtonPrimary from "./ButtonPrimary";
+import SubscriptionModal from "./SubscriptionModal";
+import logo from "/assets/logos/logo-red-raiz.png";
+import "../styles/header.css";
 
 const Header = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showSub, setShowSub] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/busqueda?q=${encodeURIComponent(searchTerm)}`);
+    }
+  };
+
+  const handleClick = () => {
+    setShowSub(true);
+  };
 
   return (
-    <header className="header">
-
-      <div className="nav-container">
-
-        {/* LOGO */}
-        <Link
-          to="/"
-          className="logo"
-        >
-
-          <img
-            src="/assets/logo-red-raiz.png"
-            alt="RedRaiz"
-          />
-
-        </Link>
-
-        {/* NAV */}
-        <nav className="nav-links">
-
-          <Link to="/">
-            Inicio
-          </Link>
-
-          <Link to="/productores">
-            Productores
-          </Link>
-
-          <Link to="/catalogo">
-            Catálogo
-          </Link>
-
-          <Link to="/blog">
-            Blog
-          </Link>
-
-          {/* NUEVO CONTACTO */}
-          <Link to="/contacto">
-            Contacto
-          </Link>
-
-          {/* SEARCH */}
-          <div className="header-search">
-
-            <FiSearch className="search-icon" />
-
-            <input
-              type="text"
-              placeholder="Buscar..."
+    <>
+      <Navbar expand="lg" className="py-3">
+        <Container>
+          {/* Logo */}
+          <Navbar.Brand as={NavLink} to="/" className="fw-bold fs-4">
+            <Image
+              src={logo}
+              alt="Logo RedRaiz"
+              fluid
+              className="me-2 logo-header"
             />
+          </Navbar.Brand>
 
-          </div>
+          {/* Menú y elementos a la derecha */}
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+            <Nav className="m-end gap-4 menu">
+              <Nav.Link as={NavLink} to="/" end className="fw-bold">
+                Inicio
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/productores" className="fw-bold">
+                Productores
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/catalogo" className="fw-bold">
+                Catálogo
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/blog" className="fw-bold">
+                Blog
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/contacto" className="fw-bold">
+                Contacto
+              </Nav.Link>
+            </Nav>
 
-          {/* BTN */}
-          <Link
-            to="/contacto"
-            className="btn-header"
-          >
-            SUSCRIPCIÓN
-          </Link>
+            {/* Campo de búsqueda + Botón de suscripción */}
+            <div className="d-flex align-items-center ms-lg-3">
+              <InputGroup className="header-search">
+                <InputGroup.Text className="search-icon-wrapper">
+                  <i className="fas fa-search search-icon"></i>
+                </InputGroup.Text>
+                <FormControl
+                  type="text"
+                  placeholder="Buscar..."
+                  className="search-input"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                />
+              </InputGroup>
 
-        </nav>
+              <ButtonPrimary onClick={handleClick} className="ms-3">
+                Suscríbete
+              </ButtonPrimary>
+            </div>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-      </div>
-
-    </header>
+      {/* Modal de Suscripción */}
+      <SubscriptionModal show={showSub} onHide={() => setShowSub(false)} />
+    </>
   );
 };
 

@@ -13,12 +13,12 @@ const SectionTitle = ({
         {tag}
       </span>
 
-      <h2 className="section-title mt-3">
+      <h2 className="mt-3">
         {title}
       </h2>
 
       {description && (
-        <p className="section-description mt-3">
+        <p className="mt-3 fs-5">
           {description}
         </p>
       )}

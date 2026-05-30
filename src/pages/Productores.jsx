@@ -10,6 +10,7 @@ import ProducerCard from "../components/ProducerCard";
 import SectionTitle from "../components/SectionTitle";
 
 import { productores } from "../data/productores";
+import "../styles/productores.css";
 
 const Productores = () => {
 

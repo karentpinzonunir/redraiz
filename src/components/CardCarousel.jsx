@@ -1,67 +1,153 @@
-import React from 'react';
-import { Carousel, Container, Row, Col, Button } from 'react-bootstrap';
-import slide1 from '/assets/slide1.jpg';
-import slide2 from '/assets/slide1.jpg';
+import React, { useState, useRef, useEffect } from 'react';
+import { Container, Card, Badge, Button } from 'react-bootstrap';
 
-const SLIDES = [
+import ButtonPrimary from './ButtonPrimary';
+import '../styles/carousel.css';
+
+const historias = [
   {
-    id: 0,
-    title: 'Título del Slide 1',
-    description: 'Descripción más larga o corta; el contenedor de imagen se adaptará a esta altura.',
-    buttons: [{ text: 'Acción 1', variant: 'primary' }, { text: 'Más info', variant: 'outline' }],
-    image: slide1,
+    nombre: "Gracias campesino",
+    region: "Colombia",
+    imagen: "/assets/carousel/img1.jpg",
+    historia:
+      "Gracias por sembrar esperanza en cada cosecha y llevar alimento fresco a millones de hogares colombianos.",
   },
   {
-    id: 1,
-    title: 'Título del Slide 2',
-    description: 'Otro slide con distinta cantidad de texto para probar el ajuste de altura.',
-    buttons: [{ text: 'Comenzar', variant: 'success' }],
-    image: slide2,
+    nombre: "Manos que alimentan",
+    region: "Campo colombiano",
+    imagen: "/assets/carousel/img2.jpg",
+    historia:
+      "Detrás de cada alimento hay esfuerzo, dedicación y amor por la tierra.",
+  },
+  {
+    nombre: "Sembrando futuro",
+    region: "Colombia",
+    imagen: "/assets/carousel/img3.jpg",
+    historia:
+      "Cada semilla cultivada representa oportunidades para las futuras generaciones.",
+  },
+  {
+    nombre: "Orgullo campesino",
+    region: "RedRaíz",
+    imagen: "/assets/carousel/img4.jpg",
+    historia:
+      "El campo colombiano es fuerza, tradición y el corazón de nuestro país.",
   },
 ];
 
-export default function CardCarousel({ interval = 5000 }) {
-  return (
-    <Carousel
-      controls
-      indicators
-      interval={interval}
-      pause="hover"
-      slide
-      className="bhc-carousel"
-    >
-      {SLIDES.map((s) => (
-        <Carousel.Item key={s.id}>
-          <Container>
-            <Row className="bhc-slide-inner align-items-stretch">
-              {/* Izquierda: texto */}
-              <Col md={6} className="bhc-left d-flex flex-column justify-content-center">
-                <h2 className="bhc-title">{s.title}</h2>
-                <p className="bhc-desc">{s.description}</p>
-                <div className="bhc-buttons mt-3">
-                  {s.buttons.map((b, i) => (
-                    <Button
-                      key={i}
-                      variant={b.variant === 'outline' ? 'light' : b.variant}
-                      className={`me-2 bhc-btn ${b.variant === 'outline' ? 'bhc-outline' : ''}`}
-                      onClick={() => console.log(`${b.text} clicked`)}
-                    >
-                      {b.text}
-                    </Button>
-                  ))}
-                </div>
-              </Col>
+export default function CardCarousel({ initial = 0 }) {
+  const [index, setIndex] = useState(initial);
+  const containerRef = useRef(null);
+  const slideRef = useRef(null);
+  const trackRef = useRef(null);
+  const GAP = 24; // espacio entre slides (px)
 
-              {/* Derecha: imagen que toma la altura del contenedor de texto */}
-              <Col md={6} className="bhc-right d-flex align-items-center justify-content-center">
-                <div className="bhc-image-wrap">
-                  <img src={s.image} alt={s.title} loading="lazy" />
+  // Mueve el track para centrar el slide activo
+  const recalc = () => {
+    const container = containerRef.current;
+    const slide = slideRef.current;
+    const track = trackRef.current;
+    if (!container || !slide || !track) return;
+
+    const slideWidth = slide.offsetWidth;
+    const step = slideWidth + GAP;
+    const containerWidth = container.offsetWidth;
+    const centerOffset = (containerWidth - slideWidth) / 2;
+    const translateX = -index * step + centerOffset;
+    track.style.transform = `translateX(${translateX}px)`;
+  };
+
+  useEffect(() => {
+    recalc();
+    window.addEventListener('resize', recalc);
+    return () => window.removeEventListener('resize', recalc);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index]);
+
+  useEffect(() => {
+    // recalc inicial después del primer render
+    setTimeout(recalc, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const prev = () => setIndex((i) => (i - 1 + historias.length) % historias.length);
+  const next = () => setIndex((i) => (i + 1) % historias.length);
+  const goTo = (i) => setIndex(i);
+
+  return (
+    <div className="position-relative py-3">
+      <Container>
+        <div className="overflow-hidden w-100" ref={containerRef}>
+          <div className="cf-track" ref={trackRef}>
+            {historias.map((h, i) => {
+              // Cálculo circular para saber la posición relativa
+              const len = historias.length;
+              const delta = (i - index + len) % len; // 0 => activo, 1 => right, len-1 => left
+              let posClass = 'inactive';
+              if (delta === 0) posClass = 'active';
+              else if (delta === 1) posClass = 'right-adjacent';
+              else if (delta === len - 1) posClass = 'left-adjacent';
+
+              const className = `cf-slide ${posClass}`;
+
+              return (
+                <div
+                  key={i}
+                  className={className}
+                  ref={i === 0 ? slideRef : null} // usamos la primera slide para medir ancho
+                >
+                  <Card className="cf-card h-100">
+                    {/* Imagen arriba */}
+                    <div className="cf-img-wrap">
+                      <Card.Img variant="top" src={h.imagen} alt={h.nombre} loading="lazy" />
+                    </div>
+
+                    <Card.Body className="d-flex flex-column text-center">
+                      {/* Región como etiqueta */}
+                      <Badge className="mb-2 align-self-center tag-historia">{h.region}</Badge>
+
+                      {/* Nombre */}
+                      <h3>{h.nombre}</h3>
+
+                      {/* Historia */}
+                      <Card.Text className="text-muted flex-grow-1">
+                        {h.historia}
+                      </Card.Text>
+
+                      {/* Botón de acción */}
+                      <div className="mt-3">
+                        <ButtonPrimary >
+                          Leer Más
+                        </ButtonPrimary>
+                      </div>
+                    </Card.Body>
+                  </Card>
                 </div>
-              </Col>
-            </Row>
-          </Container>
-        </Carousel.Item>
-      ))}
-    </Carousel>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Controles */}
+        <div className="cf-controls">
+          <button className="cf-arrow cf-prev" onClick={prev} aria-label="Anterior">‹</button>
+          <button className="cf-arrow cf-next" onClick={next} aria-label="Siguiente">›</button>
+        </div>
+
+        {/* Dots */}
+        <div className="cf-dots">
+          {historias.map((_, i) => (
+            <button
+              key={i}
+              className={`cf-dot ${i === index ? 'active' : ''}`}
+              onClick={() => goTo(i)}
+              aria-label={`Ir a historia ${i + 1}`}
+            />
+          ))}
+        </div>
+
+
+      </Container>
+    </div>
   );
 }

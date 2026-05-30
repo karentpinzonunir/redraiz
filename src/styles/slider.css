@@ -1,0 +1,38 @@
+.carousel {
+    .carousel-item>div {
+        min-height: 50vh;
+
+        p {
+            line-height: 1.7;
+            max-width: 600px;
+        }
+        .div-image {
+            height: 65vh;
+            img 
+            {
+            object-fit: cover;
+        }
+    }
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%;
+    }
+}
+
+/*
+.slider-text h2 {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.slider-text p {
+  color: #555;
+  margin-bottom: 1.25rem;
+}
+
+.slider-buttons .btn + .btn {
+  margin-left: 0.5rem;
+}
+*/

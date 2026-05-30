@@ -5,7 +5,8 @@ import {
   Button,
 } from "react-bootstrap";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import ButtonPrimary from './ButtonPrimary';
 
 const ProducerCard = ({ productor }) => {
 
@@ -47,18 +48,9 @@ const ProducerCard = ({ productor }) => {
         </Card.Text>
 
         {/* BOTON */}
-        <Link
-          to={`/productores/${productor.id}`}
-          className="producer-link"
-        >
-
-          <Button className="btn-green producer-btn">
-
-            Leer más →
-
-          </Button>
-
-        </Link>
+        <ButtonPrimary as={NavLink} to={`/productores/${productor.id}`}>
+          Leer más
+        </ButtonPrimary>
 
       </Card.Body>
 

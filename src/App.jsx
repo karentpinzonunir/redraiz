@@ -1,84 +1,39 @@
-import React from "react";
-
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-
 import "./App.css";
-
-/* ESTILOS */
-import "./styles/globals.css";
-import "./styles/header.css";
-import "./styles/footer.css";
-import "./styles/home.css";
-import "./styles/carousel.css";
-import "./styles/buttons.css";
-import "./styles/productores.css";
-import "./styles/catalogo.css";
-import "./styles/blog.css";
-
-/* COMPONENTES */
-import Header from "./components/Header";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import Footer from "./components/Footer";
-
-/* PAGINAS */
+import Header from "./components/Header";
 import Home from "./pages/Home";
-import Blog from "./pages/Blog";
-import Catalogo from "./pages/Catalogo";
 import Productores from "./pages/Productores";
 import ProductorDetalle from "./pages/ProductorDetalle";
+import Catalogo from "./pages/Catalogo";
+import ProductoDetalle from "./pages/ProductoDetalle";
+import Blog from "./pages/Blog";
+import HistoriaDetalle from "./pages/HistoriaDetalle";
 import Contacto from "./pages/Contacto";
+import Busqueda from "./pages/Busqueda";
+import './styles/globals.css';
 
 function App() {
   return (
     <Router>
-
-      <Header />
-
-      <main className="main-content">
-
+      <header className="fixed-top">
+        <Header />
+      </header>
+      <Container className="mt-5 pt-5 pb-3 contenedor--raiz">
         <Routes>
-
-          <Route
-            path="/"
-            element={<Home />}
-          />
-
-          <Route
-            path="/productores"
-            element={<Productores />}
-          />
-
-          <Route
-            path="/productores/:id"
-            element={<ProductorDetalle />}
-          />
-
-          <Route
-            path="/catalogo"
-            element={<Catalogo />}
-          />
-
-          <Route
-            path="/blog"
-            element={<Blog />}
-          />
-
-          <Route
-            path="/contacto"
-            element={<Contacto />}
-          />
-
+          <Route path="/" element={<Home />} />
+          <Route path="/productores" element={<Productores />} />
+          <Route path="/productores/:id" element={<ProductorDetalle />} />
+          <Route path="/catalogo" element={<Catalogo />} />
+          <Route path="/catalogo/:id" element={<ProductoDetalle />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:url-historia" element={<HistoriaDetalle />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/busqueda" element={<Busqueda />} />
         </Routes>
-
-      </main>
-
+      </Container>
       <Footer />
-
     </Router>
   );
 }

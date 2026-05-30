@@ -1,7 +1,9 @@
 import React from "react";
 import { Row, Col, Card } from "react-bootstrap";
+import '../styles/blog.css';
 
 import SectionTitle from "../components/SectionTitle";
+import ButtonPrimary from '../components/ButtonPrimary';
 
 const articulos = [
   {
@@ -9,42 +11,42 @@ const articulos = [
     titulo: "Del cultivo a tu mesa",
     descripcion:
       "Conoce cómo los alimentos recorren un camino lleno de dedicación y esfuerzo.",
-    imagen: "/assets/img1.jpg",
+    imagen: "/assets/carousel/img1.jpg",
   },
   {
     id: 2,
     titulo: "Agricultura sostenible",
     descripcion:
       "Prácticas responsables que protegen el medio ambiente.",
-    imagen: "/assets/img2.jpg",
+    imagen: "/assets/carousel/img2.jpg",
   },
   {
     id: 3,
     titulo: "Huertas urbanas",
     descripcion:
       "Cultiva tus propios alimentos en casa.",
-    imagen: "/assets/img3.jpg",
+    imagen: "/assets/carousel/img3.jpg",
   },
   {
     id: 4,
     titulo: "El café colombiano",
     descripcion:
       "Tradición, calidad y trabajo campesino.",
-    imagen: "/assets/img4.jpg",
+    imagen: "/assets/carousel/img4.jpg",
   },
   {
     id: 5,
     titulo: "Alimentación saludable",
     descripcion:
       "Consume productos frescos y locales.",
-    imagen: "/assets/img5.jpg",
+    imagen: "/assets/carousel/img5.jpg",
   },
   {
     id: 6,
     titulo: "Comercio justo",
     descripcion:
       "Apoyando directamente a nuestros productores.",
-    imagen: "/assets/img6.jpg",
+    imagen: "/assets/carousel/img6.jpg",
   },
 ];
 
@@ -75,7 +77,7 @@ const Blog = () => {
 
             <Col lg={6}>
               <img
-                src="/assets/img1.jpg"
+                src="/assets/carousel/img1.jpg"
                 alt="Artículo destacado"
                 className="featured-image"
               />
@@ -95,9 +97,11 @@ const Blog = () => {
                 Cada fruta, verdura o producto que llega a tu hogar tiene detrás una historia de esfuerzo, tradición y amor por la tierra.
               </p>
 
-              <button className="btn-green">
-                Leer artículo
-              </button>
+              <div className="mt-3">
+                <ButtonPrimary >
+                  Leer Más
+                </ButtonPrimary>
+              </div>
 
             </Col>
 
@@ -134,9 +138,11 @@ const Blog = () => {
                       {articulo.descripcion}
                     </Card.Text>
 
-                    <button className="btn-green">
-                      Leer más
-                    </button>
+                    <div className="mt-3">
+                <ButtonPrimary >
+                  Leer Más
+                </ButtonPrimary>
+              </div>
 
                   </Card.Body>
 

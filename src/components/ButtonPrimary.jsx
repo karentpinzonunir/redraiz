@@ -1,8 +1,15 @@
-const ButtonPrimary = ({ children }) => {
+import { Button } from "react-bootstrap";
+import '../styles/buttons.css';
+
+const ButtonPrimary = ({ children, className = "", ...props }) => {
   return (
-    <button className="btn-primary">
+    <Button
+      variant="" 
+      className={`rounded-pill px-4 btn btn--primario ${className}`.trim()}
+      {...props}
+    >
       {children}
-    </button>
+    </Button>
   );
 };
 

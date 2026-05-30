@@ -14,12 +14,12 @@ export const productores = [
     historia:
       "Desde hace más de 15 años trabaja junto a su familia cultivando productos frescos y saludables para hogares colombianos.",
 
-    imagen: "/assets/productor1.jpg",
+    imagen: "/assets/productores/productor1.jpg",
 
     galeria: [
-      "/assets/productor1.jpg",
-      "/assets/productor2.jpg",
-      "/assets/productor3.jpg",
+      "/assets/productores/productor1.jpg",
+      "/assets/productores/productor2.jpg",
+      "/assets/productores/productor3.jpg",
     ],
 
     productos: [
@@ -55,12 +55,12 @@ export const productores = [
     historia:
       "Producción local enfocada en sostenibilidad y calidad.",
 
-    imagen: "/assets/productor2.jpg",
+    imagen: "/assets/productores/productor2.jpg",
 
     galeria: [
-      "/assets/productor2.jpg",
-      "/assets/productor4.jpg",
-      "/assets/productor5.jpg",
+      "/assets/productores/productor2.jpg",
+      "/assets/productores/productor4.jpg",
+      "/assets/productores/productor5.jpg",
     ],
 
     productos: [
@@ -91,12 +91,12 @@ export const productores = [
     historia:
       "Más de 20 años cultivando alimentos naturales.",
 
-    imagen: "/assets/productor3.jpg",
+    imagen: "/assets/productores/productor3.jpg",
 
     galeria: [
-      "/assets/productor3.jpg",
-      "/assets/productor6.jpg",
-      "/assets/productor7.jpg",
+      "/assets/productores/productor3.jpg",
+      "/assets/productores/productor6.jpg",
+      "/assets/productores/productor7.jpg",
     ],
 
     productos: [
@@ -127,12 +127,12 @@ export const productores = [
     historia:
       "Huertas locales con producción responsable.",
 
-    imagen: "/assets/productor4.jpg",
+    imagen: "/assets/productores/productor4.jpg",
 
     galeria: [
-      "/assets/productor4.jpg",
-      "/assets/productor8.jpg",
-      "/assets/productor9.jpg",
+      "/assets/productores/productor4.jpg",
+      "/assets/productores/productor8.jpg",
+      "/assets/productores/productor9.jpg",
     ],
 
     productos: [
@@ -163,12 +163,12 @@ export const productores = [
     historia:
       "Producción artesanal y comercio justo.",
 
-    imagen: "/assets/productor5.jpg",
+    imagen: "/assets/productores/productor5.jpg",
 
     galeria: [
-      "/assets/productor5.jpg",
-      "/assets/productor10.jpg",
-      "/assets/productor11.jpg",
+      "/assets/productores/productor5.jpg",
+      "/assets/productores/productor10.jpg",
+      "/assets/productores/productor11.jpg",
     ],
 
     productos: [
@@ -199,12 +199,12 @@ export const productores = [
     historia:
       "Producción artesanal enfocada en café premium.",
 
-    imagen: "/assets/productor6.jpg",
+    imagen: "/assets/productores/productor6.jpg",
 
     galeria: [
-      "/assets/productor6.jpg",
-      "/assets/productor12.jpg",
-      "/assets/productor13.jpg",
+      "/assets/productores/productor6.jpg",
+      "/assets/productores/productor12.jpg",
+      "/assets/productores/productor13.jpg",
     ],
 
     productos: [
