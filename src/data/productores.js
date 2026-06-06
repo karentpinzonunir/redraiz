@@ -79,7 +79,7 @@ export const productores = [
   {
     id: 3,
 
-    nombre: "Don Quijote de la Mancha",
+    nombre: "Gimena Elvira Rodríguez",
 
     region: "Antioquia",
 
@@ -151,7 +151,7 @@ export const productores = [
   {
     id: 5,
 
-    nombre: "Jorge Ramírez",
+    nombre: "Sandra Carolina Ramírez",
 
     region: "Cundinamarca",
 
