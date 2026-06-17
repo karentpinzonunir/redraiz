@@ -71,13 +71,7 @@ const Home = () => {
 
       {/* CONTACTO */}
       <section className="section-spacing">
-
-        <div className="w-75 mx-auto">
-
-          <ContactForm />
-
-        </div>
-
+        <ContactForm />
       </section>
     </div >
   );

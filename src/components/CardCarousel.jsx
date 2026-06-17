@@ -1,48 +1,29 @@
+// CardCarousel.jsx
 import React, { useState, useRef, useEffect } from 'react';
-import { Container, Card, Badge, Button } from 'react-bootstrap';
-
+import { Container, Card, Badge } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import ButtonPrimary from './ButtonPrimary';
+import { useGet } from '../hooks/useGet';
+import { useInterval } from '../hooks/useInterval';
+import { useWindowSize } from '../hooks/useWindowSize';
 import '../styles/carousel.css';
 
-const historias = [
-  {
-    nombre: "Gracias campesino",
-    region: "Colombia",
-    imagen: "/assets/carousel/img1.jpg",
-    historia:
-      "Gracias por sembrar esperanza en cada cosecha y llevar alimento fresco a millones de hogares colombianos.",
-  },
-  {
-    nombre: "Manos que alimentan",
-    region: "Campo colombiano",
-    imagen: "/assets/carousel/img2.jpg",
-    historia:
-      "Detrás de cada alimento hay esfuerzo, dedicación y amor por la tierra.",
-  },
-  {
-    nombre: "Sembrando futuro",
-    region: "Colombia",
-    imagen: "/assets/carousel/img3.jpg",
-    historia:
-      "Cada semilla cultivada representa oportunidades para las futuras generaciones.",
-  },
-  {
-    nombre: "Orgullo campesino",
-    region: "RedRaíz",
-    imagen: "/assets/carousel/img4.jpg",
-    historia:
-      "El campo colombiano es fuerza, tradición y el corazón de nuestro país.",
-  },
-];
+export default function CardCarousel({ id = 2, initial = 0 }) {
+  const { data: slider, loading, error } = useGet(`/api/sliders/${id}/completo`);
 
-export default function CardCarousel({ initial = 0 }) {
   const [index, setIndex] = useState(initial);
+  const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef(null);
   const slideRef = useRef(null);
   const trackRef = useRef(null);
-  const GAP = 24; // espacio entre slides (px)
+  const GAP = 24;
 
-  // Mueve el track para centrar el slide activo
+  const slides = slider?.slides ?? [];
+
+  // ── useWindowSize reemplaza el addEventListener manual ────────────
+  const { width } = useWindowSize();
+
+  // ── Centrar slide activo ──────────────────────────────────────────
   const recalc = () => {
     const container = containerRef.current;
     const slide = slideRef.current;
@@ -57,66 +38,81 @@ export default function CardCarousel({ initial = 0 }) {
     track.style.transform = `translateX(${translateX}px)`;
   };
 
+  // Se recalcula cuando cambia el índice, los slides o el ancho de ventana
   useEffect(() => {
     recalc();
-    window.addEventListener('resize', recalc);
-    return () => window.removeEventListener('resize', recalc);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index]);
+  }, [index, slides, width]);
 
+  // Recalc inicial con pequeño delay para que el DOM esté listo
   useEffect(() => {
-    // recalc inicial después del primer render
     setTimeout(recalc, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const prev = () => setIndex((i) => (i - 1 + historias.length) % historias.length);
-  const next = () => setIndex((i) => (i + 1) % historias.length);
+  // ── useInterval reemplaza el setInterval/clearInterval manual ─────
+  useInterval(
+    () => setIndex((i) => (i + 1) % slides.length),
+    !isPaused && slider?.interval && slides.length > 0 ? slider.interval : null
+  );
+
+  // ── Navegación ────────────────────────────────────────────────────
+  const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
+  const next = () => setIndex((i) => (i + 1) % slides.length);
   const goTo = (i) => setIndex(i);
 
+  // ── Estados de carga ──────────────────────────────────────────────
+  if (loading) return <p className="text-center py-5">Cargando historias...</p>;
+  if (error) return <p className="text-center py-5 text-danger">Error: {error}</p>;
+  if (!slider || slides.length === 0) return null;
+
+  // ── Render ────────────────────────────────────────────────────────
   return (
-    <div className="position-relative py-3">
+    <div
+      className="position-relative py-3"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <Container>
         <div className="overflow-hidden w-100" ref={containerRef}>
           <div className="cf-track" ref={trackRef}>
-            {historias.map((h, i) => {
-              // Cálculo circular para saber la posición relativa
-              const len = historias.length;
-              const delta = (i - index + len) % len; // 0 => activo, 1 => right, len-1 => left
+            {slides.map((slide, i) => {
+              const len = slides.length;
+              const delta = (i - index + len) % len;
               let posClass = 'inactive';
               if (delta === 0) posClass = 'active';
               else if (delta === 1) posClass = 'right-adjacent';
               else if (delta === len - 1) posClass = 'left-adjacent';
 
-              const className = `cf-slide ${posClass}`;
-
               return (
                 <div
-                  key={i}
-                  className={className}
-                  ref={i === 0 ? slideRef : null} // usamos la primera slide para medir ancho
+                  key={slide.id}
+                  className={`cf-slide ${posClass}`}
+                  ref={i === index ? slideRef : null}
                 >
                   <Card className="cf-card h-100">
-                    {/* Imagen arriba */}
                     <div className="cf-img-wrap">
-                      <Card.Img variant="top" src={h.imagen} alt={h.nombre} loading="lazy" />
+                      <Card.Img
+                        variant="top"
+                        src={`/assets/${slider.carpeta}/${slide.imagen}`}
+                        alt={slide.titulo}
+                        loading="lazy"
+                      />
                     </div>
 
                     <Card.Body className="d-flex flex-column text-center">
-                      {/* Región como etiqueta */}
-                      <Badge className="mb-2 align-self-center tag-historia">{h.region}</Badge>
+                      <Badge className="mb-2 align-self-center tag-historia">
+                        {slide.categoria?.nombre || 'Sin categoría'}
+                      </Badge>
 
-                      {/* Nombre */}
-                      <h3>{h.nombre}</h3>
+                      <h3>{slide.titulo}</h3>
 
-                      {/* Historia */}
                       <Card.Text className="text-muted flex-grow-1">
-                        {h.historia}
+                        {slide.descripcion}
                       </Card.Text>
 
-                      {/* Botón de acción */}
                       <div className="mt-3">
-                        <ButtonPrimary >
+                        <ButtonPrimary as={NavLink} to={`/historia/${slide.id}`}>
                           Leer Más
                         </ButtonPrimary>
                       </div>
@@ -136,7 +132,7 @@ export default function CardCarousel({ initial = 0 }) {
 
         {/* Dots */}
         <div className="cf-dots">
-          {historias.map((_, i) => (
+          {slides.map((_, i) => (
             <button
               key={i}
               className={`cf-dot ${i === index ? 'active' : ''}`}
@@ -145,8 +141,6 @@ export default function CardCarousel({ initial = 0 }) {
             />
           ))}
         </div>
-
-
       </Container>
     </div>
   );

@@ -12,11 +12,13 @@ import Blog from "./pages/Blog";
 import HistoriaDetalle from "./pages/HistoriaDetalle";
 import Contacto from "./pages/Contacto";
 import Busqueda from "./pages/Busqueda";
+import ScrollToTop from "./components/ScrollToTop";
 import './styles/globals.css';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <header className="fixed-top">
         <Header />
       </header>
