@@ -25,14 +25,22 @@ function App() {
       <Container className="mt-5 pt-5 pb-3 contenedor--raiz">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/productores" element={<Productores />} />
-          <Route path="/productores/:id" element={<ProductorDetalle />} />
-          <Route path="/catalogo" element={<Catalogo />} />
-          <Route path="/catalogo/:id" element={<ProductoDetalle />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:url-historia" element={<HistoriaDetalle />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/busqueda" element={<Busqueda />} />
+
+  <Route path="/productores" element={<Productores />} />
+
+  <Route path="/productores/:id" element={<ProductorDetalle />} />
+
+  <Route path="/catalogo" element={<Catalogo />} />
+
+  <Route path="/catalogo/:id" element={<ProductoDetalle />} />
+
+  <Route path="/blog" element={<Blog />} />
+
+  <Route path="/blog/:id" element={<HistoriaDetalle />} />
+
+  <Route path="/contacto" element={<Contacto />} />
+
+  <Route path="/busqueda" element={<Busqueda />} />
         </Routes>
       </Container>
       <Footer />
