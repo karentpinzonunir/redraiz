@@ -1,0 +1,230 @@
+.historia-detalle{
+
+    min-height:100vh;
+
+    padding-bottom:80px;
+
+}
+
+.banner-blog{
+
+    text-align:center;
+
+    padding:80px 20px 40px;
+
+}
+
+.banner-blog span{
+
+    color:#069b35;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+}
+
+.banner-blog h1{
+
+    max-width:900px;
+
+    margin:20px auto;
+
+    font-size:3rem;
+
+    font-weight:800;
+
+    color:#111;
+}
+
+.info-blog{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    color:#666;
+}
+
+.imagen-blog{
+
+    max-width:1000px;
+
+    margin:auto;
+
+    padding:0 20px;
+}
+
+.imagen-blog img{
+
+    width:100%;
+
+    border-radius:25px;
+
+    object-fit:cover;
+}
+
+.contenido-blog{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:50px 20px;
+
+}
+
+.resumen{
+
+    font-size:1.5rem;
+
+    font-weight:600;
+
+    color:#444;
+
+    line-height:1.8;
+
+    margin-bottom:40px;
+
+}
+
+.contenido-blog h2{
+
+    font-size:2rem;
+
+    margin-bottom:20px;
+
+    color:#111;
+
+}
+
+.contenido-blog p{
+
+    font-size:1.1rem;
+
+    line-height:2;
+
+    color:#555;
+
+}
+
+.historias-relacionadas{
+
+    max-width:1200px;
+
+    margin:80px auto;
+
+    padding:0 20px;
+
+}
+
+.historias-relacionadas h3{
+
+    text-align:center;
+
+    font-size:2rem;
+
+    margin-bottom:40px;
+
+    font-weight:700;
+
+}
+
+.volver-blog{
+
+    text-align:center;
+
+    margin-top:60px;
+
+}
+
+.btn-volver{
+
+    background:#069b35;
+
+    color:white;
+
+    padding:14px 28px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btn-volver:hover{
+
+    background:#047a28;
+
+    color:white;
+
+}
+.comentarios{
+
+    max-width:800px;
+
+    margin:80px auto;
+
+}
+
+.comentarios h2{
+
+    margin-bottom:30px;
+
+}
+
+.comentarios input,
+
+.comentarios textarea{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border-radius:15px;
+
+    border:1px solid #ddd;
+
+}
+
+.comentarios textarea{
+
+    min-height:120px;
+
+}
+
+.comentarios button{
+
+    background:#069b35;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:30px;
+
+}
+
+.comentario-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    margin-top:20px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}

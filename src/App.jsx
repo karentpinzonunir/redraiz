@@ -37,6 +37,7 @@ function App() {
       <main className="main-content">
 
         <Routes>
+<<<<<<< Updated upstream
 
           <Route
             path="/"
@@ -68,6 +69,17 @@ function App() {
             element={<Contacto />}
           />
 
+=======
+          <Route path="/" element={<Home />} />
+          <Route path="/productores" element={<Productores />} />
+          <Route path="/productores/:id" element={<ProductorDetalle />} />
+          <Route path="/catalogo" element={<Catalogo />} />
+          <Route path="/catalogo/:id" element={<ProductoDetalle />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<HistoriaDetalle />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/busqueda" element={<Busqueda />} />
+>>>>>>> Stashed changes
         </Routes>
 
       </main>
