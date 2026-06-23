@@ -27,9 +27,8 @@ const ProducerCard = ({ productor }) => {
     <NavLink
       to={`/productores/${productor.id}`}
       className="text-decoration-none"
-      style={{ display: "block" }}
     >
-      <Card className="producer-card h-100 border-0 rounded-4 overflow-hidden bg-white shadow-sm">
+      <Card className="redraiz-card h-100 border-0 rounded-4 overflow-hidden bg-white shadow-sm">
         <div className="producer-image-wrapper">
           <Card.Img
             variant="top"
@@ -44,20 +43,20 @@ const ProducerCard = ({ productor }) => {
         </div>
 
         <Card.Body className="p-4 d-flex flex-column">
-          <Badge className="mb-3 align-self-start tag-historia">
+          <Badge className="mb-3 align-self-start tag-categoria">
             {categoriaLabel}
           </Badge>
 
-          <span className="text-success text-uppercase fw-bold small ls-1 mb-1">
+          <span className="section-tag">
             {regionLabel}
           </span>
 
-          <Card.Title className="fw-black fs-4 producer-card-title mb-3">
+          <Card.Title className="fw-black fs-4 redraiz-card-title mb-3">
             {productor?.nombre}
           </Card.Title>
 
-          <Card.Text className="text-secondary lh-lg producer-card-desc flex-grow-1">
-            {productor?.descripcion || "Sin descripción disponible."}
+          <Card.Text className="text-secondary redraiz-card-desc flex-grow-1">
+            {productor?.historia || "Sin descripción disponible."}
           </Card.Text>
 
           <div className="mt-4">

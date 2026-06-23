@@ -26,22 +26,22 @@
 
 .product-card img {
   height: 280px;
-
-  object-fit: cover;
 }
 
 .product-card .card-body {
   padding: 24px;
 }
 
-.price {
-  color: #0d7a34;
-
-  font-weight: 700;
-
-  margin: 15px 0;
+.product-image-wrapper{
+  height: 295px;
 }
 
-.producer-name {
-  color: #666;
+.product-image  {
+  object-fit: contain;
+}
+
+.price {
+  color: var(--secondary-color);
+  font-weight: 700;
+  margin: 15px 0;
 }

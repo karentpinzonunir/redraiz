@@ -73,7 +73,7 @@ const ContactForm = () => {
   return (
     <div className="bg-white rounded-5 py-5">
       <div className="w-75 mx-auto">
-        <h2 className="text-center mb-5">Cuéntanos sobre tu producción</h2>
+        <h3 className="fw-bold mb5 text-center">Cuéntanos sobre tu producción</h3>
 
         <Form noValidate onSubmit={handleSubmit}>
           <Row className="g-4">

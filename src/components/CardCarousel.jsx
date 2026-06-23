@@ -101,7 +101,7 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
                     </div>
 
                     <Card.Body className="d-flex flex-column text-center">
-                      <Badge className="mb-2 align-self-center tag-historia">
+                      <Badge className="mb-2 align-self-center tag-categoria">
                         {slide.categoria?.nombre || 'Sin categoría'}
                       </Badge>
 

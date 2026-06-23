@@ -1,6 +1,6 @@
 // src/pages/Productores.jsx
 import React from "react";
-import { Row, Col, Spinner, Form, InputGroup } from "react-bootstrap";
+import { Row, Col, Spinner, Form, InputGroup, Container } from "react-bootstrap";
 import ProducerCard from "../components/ProducerCard";
 import SectionTitle from "../components/SectionTitle";
 import { useGet } from "../hooks/useGet";
@@ -21,27 +21,27 @@ const Productores = () => {
     <div>
       {/* HERO */}
       <section className="py-5 text-center">
-        <div className="container-custom">
+        <Container>
           <SectionTitle
             tag="Nuestros productores"
             title="Cada alimento tiene una historia, conoce a quien lo cultivó"
             description="Explora alimentos cultivados en Colombia, seleccionados directamente por nuestros productores."
             center={true}
           />
-        </div>
+        </Container>
       </section>
 
       {/* BUSCADOR SIMPLE */}
-      <section className="pb-4">
+      <section className="pb-5">
         <div className="container-custom">
-          <div className="mx-auto" style={{ maxWidth: 600 }}>
+          <div className="mx-auto buscador" >
             <InputGroup size="lg" className="shadow-sm rounded-pill overflow-hidden border">
               <InputGroup.Text className="bg-white border-0 ps-4">
-                <i className="bi bi-search text-success" />
+                <i class="fa-solid fa-magnifying-glass text-success"></i>
               </InputGroup.Text>
               <Form.Control
                 type="text"
-                placeholder="Buscar"
+                placeholder="Buscar en productores"
                 className="border-0"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}

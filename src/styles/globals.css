@@ -5,7 +5,7 @@
   --accent-color: #b5d95a;
   --complementary-color: #f3fff3;
   --title-color: #111;
-  --text-color: #555;
+  --text-color: #414141;
 }
 
 @font-face {
@@ -44,10 +44,8 @@ body {
 
   /* FONDO PREMIUM */
   background-image:
-    linear-gradient(
-      rgba(245,245,245,0.88),
-      rgba(245,245,245,0.88)
-    ),
+    linear-gradient(rgba(245, 245, 245, 0.88),
+      rgba(245, 245, 245, 0.88)),
     url('/assets/fondo.png');
 
   background-repeat: repeat;
@@ -88,7 +86,6 @@ h3 {
 
 p {
   font-size: 1rem;
-  margin-bottom: 20px;
   color: var(--text-color);
 }
 
@@ -98,4 +95,52 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+.tag-categoria {
+  background-color: var(--secondary-color) !important;
+}
+
+.buscador {
+  max-width: 600px;
+}
+
+.carousel-ligth .carousel-indicators [data-bs-target],
+.carousel-light .carousel-indicators [data-bs-target] {
+  background-color: white;
+}
+
+.carousel-light .carousel-indicators {
+  margin-bottom: 0;
+}
+
+.producer-image-wrapper,
+.product-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.producer-image,
+.product-image {
+  width: 100%;
+  transition: transform .5s ease;
+}
+
+.redraiz-card:hover .producer-image,
+.redraiz-card:hover .product-image,
+.boton-galeria:hover img {
+  transform: scale(1.05);
+}
+
+.breadcrumb-item {
+  a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    transition: transform .5s ease;
+
+    &:hover {
+      color: var(--secondary-color);
+    }
+  }
 }

@@ -1,35 +1,22 @@
 /* ── Hover card ── */
-.producer-card {
+.redraiz-card,
+.boton-galeria {
   transition: transform .4s ease, box-shadow .4s ease;
 }
 
-.producer-card:hover {
+.redraiz-card:hover,
+.boton-galeria:hover {
   transform: translateY(-10px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.10) !important;
 }
 
 /* ── Imagen con zoom ── */
 .producer-image-wrapper {
-  width: 100%;
-  height: 620px;
-  overflow: hidden;
+  height: 520px;
 }
 
 .producer-image {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  transition: transform .5s ease;
-}
-
-.producer-card:hover .producer-image {
-  transform: scale(1.05);
-}
-
-/* ── Región ── */
-.producer-region {
-  color: #0d7a34;
-  letter-spacing: 1px;
 }
 
 /* ── Responsive ── */
