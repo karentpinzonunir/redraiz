@@ -1,11 +1,8 @@
 import React from "react";
-
 import { useParams, Link } from "react-router-dom";
-
 import { Row, Col, Card } from "react-bootstrap";
 
 import ButtonPrimary from "../components/ButtonPrimary";
-
 import Comentarios from "../components/Comentarios";
 
 import historias from "../data/historias";
@@ -27,18 +24,14 @@ const HistoriaDetalle = () => {
       <div className="historia-error">
 
         <h1>
-
           Historia no encontrada
-
         </h1>
 
         <Link
           to="/blog"
           className="btn-volver"
         >
-
           Volver al Blog
-
         </Link>
 
       </div>
@@ -56,32 +49,20 @@ const HistoriaDetalle = () => {
       <section className="banner-blog">
 
         <span>
-
           BLOG
-
         </span>
 
         <h1>
-
           {historia.titulo}
-
         </h1>
 
         <div className="info-blog">
 
-          <p>
-
-            {historia.fecha}
-
-          </p>
+          <p>{historia.fecha}</p>
 
           <p>•</p>
 
-          <p>
-
-            {historia.autor}
-
-          </p>
+          <p>{historia.autor}</p>
 
         </div>
 
@@ -92,11 +73,9 @@ const HistoriaDetalle = () => {
       <section className="imagen-blog">
 
         <img
-
           src={historia.imagen}
-
           alt={historia.titulo}
-
+          className="featured-image"
         />
 
       </section>
@@ -113,52 +92,45 @@ const HistoriaDetalle = () => {
 
       </section>
 
-      {/* Secciones */}
+      {/* Contenido de la historia */}
 
-      {
+      <section className="contenido-blog">
 
-        historia.secciones &&
+        {
 
-        historia.secciones.map(
+          historia.contenido
 
-          (seccion, index) => (
+            .split("\n")
 
-            <section
+            .map(
 
-              key={index}
+              (parrafo, index) =>
 
-              className="contenido-blog"
+                parrafo.trim() !== "" && (
 
-            >
+                  <p
+                    key={index}
+                    className="texto-seccion"
+                  >
 
-              <h2>
+                    {parrafo}
 
-                {seccion.titulo}
+                  </p>
 
-              </h2>
+                )
 
-              <p>
+            )
 
-                {seccion.texto}
+        }
 
-              </p>
-
-            </section>
-
-          )
-
-        )
-
-      }
+      </section>
 
       {/* Más historias */}
 
       <section className="historias-relacionadas">
 
         <h3>
-
           Más historias
-
         </h3>
 
         <Row className="g-4">
@@ -168,80 +140,62 @@ const HistoriaDetalle = () => {
             historias
 
               .filter(
-
                 (h) => h.id !== historia.id
-
               )
 
               .slice(0, 3)
 
-              .map(
+              .map((h) => (
 
-                (h) => (
+                <Col
+                  lg={4}
+                  md={6}
+                  key={h.id}
+                >
 
-                  <Col
+                  <Card className="blog-card">
 
-                    lg={4}
+                    <Card.Img
+                      variant="top"
+                      src={h.imagen}
+                    />
 
-                    md={6}
+                    <Card.Body>
 
-                    key={h.id}
+                      <Card.Title>
 
-                  >
+                        {h.titulo}
 
-                    <Card className="blog-card">
+                      </Card.Title>
 
-                      <Card.Img
+                      <Card.Text>
 
-                        variant="top"
+                        {h.descripcion}
 
-                        src={h.imagen}
+                      </Card.Text>
 
-                      />
+                      <Link
+                        to={`/blog/${h.id}`}
+                        style={{
+                          textDecoration: "none"
+                        }}
+                      >
 
-                      <Card.Body>
+                        <ButtonPrimary>
 
-                        <Card.Title>
+                          Leer Más
 
-                          {h.titulo}
+                        </ButtonPrimary>
 
-                        </Card.Title>
+                      </Link>
 
-                        <Card.Text>
+                    </Card.Body>
 
-                          {h.descripcion}
+                  </Card>
 
-                        </Card.Text>
+                </Col>
 
-                        <Link
-
-                          to={`/blog/${h.id}`}
-
-                          style={{
-
-                            textDecoration: "none"
-
-                          }}
-
-                        >
-
-                          <ButtonPrimary>
-
-                            Leer Más
-
-                          </ButtonPrimary>
-
-                        </Link>
-
-                      </Card.Body>
-
-                    </Card>
-
-                  </Col>
-
-                )
-
-              )
+              ))
 
           }
 
@@ -252,21 +206,16 @@ const HistoriaDetalle = () => {
       {/* Comentarios */}
 
       <Comentarios
-
         historiaId={historia.id}
-
       />
 
-      {/* Volver */}
+      {/* Botón volver */}
 
       <div className="volver-blog">
 
         <Link
-
           to="/blog"
-
           className="btn-volver"
-
         >
 
           ← Volver al Blog
