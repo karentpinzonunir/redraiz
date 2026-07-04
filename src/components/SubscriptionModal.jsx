@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Modal, Form, Alert, Spinner, FloatingLabel } from "react-bootstrap";
 import ButtonPrimary from "./ButtonPrimary";
+import { usePost } from "../hooks/usePost";
+import { useFormField } from "../hooks/useFormField";
 import "../styles/modal.css";
 
 /**
@@ -9,68 +11,68 @@ import "../styles/modal.css";
  *  - onHide: () => void
  */
 export default function SubscriptionModal({ show, onHide }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [sending, setSending] = useState(false);
-  const [success, setSuccess] = useState(false);
   const nameRef = useRef(null);
 
+  // ── 1. Estado local de éxito ─────────────────────────────────────
+  const [success, setSuccess] = useState(false);
+
+  // ── 2. Hooks de campo con validación en tiempo real ──────────────
+  const nombre = useFormField("", (v) =>
+    !v.trim() ? "El nombre es requerido." : null,
+  );
+  const email = useFormField("", (v) => {
+    if (!v.trim()) return "El correo es requerido.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))
+      return "Ingresa un correo válido.";
+    return null;
+  });
+
+  // ── 3. Hook de API ───────────────────────────────────────────────
+  const { post, loading: sending, error } = usePost("/api/suscripcion");
+
+  const allFields = [nombre, email];
+
+  // ── 4. Enfocar el primer campo al abrir el modal ─────────────────
   useEffect(() => {
     if (show) {
-      // pequeño delay para que el modal renderice antes de enfocar
       const t = setTimeout(() => nameRef.current?.focus(), 120);
       return () => clearTimeout(t);
     }
   }, [show]);
 
-  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
+  // ── 5. Manejo del envío ──────────────────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
-    if (!name.trim() || !email.trim()) {
-      setError("Por favor completa ambos campos.");
-      return;
-    }
-    if (!validateEmail(email)) {
-      setError("Ingresa un correo válido.");
-      return;
-    }
+    // Marcar todos los campos como tocados para mostrar errores
+    allFields.forEach((f) => f.onBlur());
 
-    setSending(true);
+    const hasErrors = allFields.some(
+      (f) => f.isInvalid || (!f.isValid && f.value === ""),
+    );
+    if (hasErrors) return;
 
-    try {
-      // Ejemplo: enviar a tu API
-      // await fetch("/api/subscribe", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ name, email }),
-      // });
+    // post() retorna { ok: true, data } o { ok: false, error }
+    const result = await post({
+      nombre: nombre.value,
+      email: email.value,
+    });
 
-      // Simular delay
-      await new Promise((res) => setTimeout(res, 900));
+    if (result.ok) {
+      allFields.forEach((f) => f.reset());
+      setSuccess(true); // ← estado LOCAL, no del hook
 
-      setSuccess(true);
-      setName("");
-      setEmail("");
-
-      // Cerrar modal automáticamente después de 1.5s (opcional)
+      // Cerrar el modal automáticamente después de 3 segundos
       setTimeout(() => {
         setSuccess(false);
         onHide();
-      }, 1500);
-    } catch (err) {
-      setError("Ocurrió un error al suscribir. Intenta nuevamente.");
-    } finally {
-      setSending(false);
+      }, 3000);
     }
   };
 
+  // ── 6. Cerrar limpiando todo ─────────────────────────────────────
   const handleClose = () => {
-    setError("");
-    setSending(false);
+    allFields.forEach((f) => f.reset());
     setSuccess(false);
     onHide();
   };
@@ -83,28 +85,33 @@ export default function SubscriptionModal({ show, onHide }) {
 
       <Modal.Body>
         {!success ? (
+          // ── Formulario ───────────────────────────────────────────
           <>
             <p className="mb-3 lead-text">
-              Únete a nuestra comunidad. Recibe novedades, historias de productores y ofertas directamente en tu correo.
+              Únete a nuestra comunidad. Recibe novedades, historias de
+              productores y ofertas directamente en tu correo.
             </p>
 
             {error && <Alert variant="danger">{error}</Alert>}
 
             <Form onSubmit={handleSubmit} noValidate>
               <FloatingLabel
-                controlId="subName"
+                controlId="subNombre"
                 label="Nombre"
                 className="mb-3"
               >
                 <Form.Control
+                  {...nombre}
                   ref={nameRef}
                   type="text"
-                  placeholder=" "               /* importante para FloatingLabel */
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  placeholder=" "
+                  isInvalid={nombre.isInvalid}
+                  isValid={nombre.isValid}
                   disabled={sending}
-                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  {nombre.error}
+                </Form.Control.Feedback>
               </FloatingLabel>
 
               <FloatingLabel
@@ -113,21 +120,31 @@ export default function SubscriptionModal({ show, onHide }) {
                 className="mb-3"
               >
                 <Form.Control
+                  {...email}
                   type="email"
                   placeholder=" "
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  isInvalid={email.isInvalid}
+                  isValid={email.isValid}
                   disabled={sending}
-                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  {email.error}
+                </Form.Control.Feedback>
               </FloatingLabel>
 
-              <div className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center mt-3">
                 <ButtonPrimary type="submit" disabled={sending}>
                   {sending ? (
                     <>
-                      <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-                      <span className="ms-2">Enviando...</span>
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        className="me-2"
+                      />
+                      Enviando...
                     </>
                   ) : (
                     "Suscribirme"
@@ -137,9 +154,16 @@ export default function SubscriptionModal({ show, onHide }) {
             </Form>
           </>
         ) : (
-          <div className="text-center py-4">
-            <h5>¡Gracias por unirte!</h5>
-            <p className="mb-0">Revisa tu correo para confirmar tu suscripción.</p>
+          // ── Mensaje de éxito (reemplaza el formulario) ───────────
+          <div className="text-center py-5">
+            <div className="mb-3" style={{ fontSize: "3rem" }}>
+              ✅
+            </div>
+            <h4 className="fw-bold">¡Suscripción Exitosa!</h4>
+            <p className="text-muted mb-0">
+              Gracias por unirte a RedRaíz. Hemos registrado tu correo
+              correctamente.
+            </p>
           </div>
         )}
       </Modal.Body>

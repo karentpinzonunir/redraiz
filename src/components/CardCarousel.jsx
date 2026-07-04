@@ -1,15 +1,19 @@
 // CardCarousel.jsx
-import React, { useState, useRef, useEffect } from 'react';
-import { Container, Card, Badge } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
-import ButtonPrimary from './ButtonPrimary';
-import { useGet } from '../hooks/useGet';
-import { useInterval } from '../hooks/useInterval';
-import { useWindowSize } from '../hooks/useWindowSize';
-import '../styles/carousel.css';
+import React, { useState, useRef, useEffect } from "react";
+import { Container, Card, Badge, Spinner } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import ButtonPrimary from "./ButtonPrimary";
+import { useGet } from "../hooks/useGet";
+import { useInterval } from "../hooks/useInterval";
+import { useWindowSize } from "../hooks/useWindowSize";
+import "../styles/carousel.css";
 
 export default function CardCarousel({ id = 2, initial = 0 }) {
-  const { data: slider, loading, error } = useGet(`/api/sliders/${id}/completo`);
+  const {
+    data: slider,
+    loading,
+    error,
+  } = useGet(`/api/sliders/${id}/completo`);
 
   const [index, setIndex] = useState(initial);
   const [isPaused, setIsPaused] = useState(false);
@@ -53,7 +57,7 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
   // ── useInterval reemplaza el setInterval/clearInterval manual ─────
   useInterval(
     () => setIndex((i) => (i + 1) % slides.length),
-    !isPaused && slider?.interval && slides.length > 0 ? slider.interval : null
+    !isPaused && slider?.interval && slides.length > 0 ? slider.interval : null,
   );
 
   // ── Navegación ────────────────────────────────────────────────────
@@ -62,8 +66,17 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
   const goTo = (i) => setIndex(i);
 
   // ── Estados de carga ──────────────────────────────────────────────
-  if (loading) return <p className="text-center py-5">Cargando historias...</p>;
-  if (error) return <p className="text-center py-5 text-danger">Error: {error}</p>;
+  if (loading)
+    return (
+      <div className="d-flex justify-content-center align-items-center carrousel-home">
+        <div className="text-center">
+          <Spinner variant="dark" role="status"></Spinner>
+          <p className="mt-2">Cargando Slider ...</p>
+        </div>
+      </div>
+    );
+  if (error)
+    return <p className="text-center py-5 text-danger">Error: {error}</p>;
   if (!slider || slides.length === 0) return null;
 
   // ── Render ────────────────────────────────────────────────────────
@@ -79,10 +92,10 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
             {slides.map((slide, i) => {
               const len = slides.length;
               const delta = (i - index + len) % len;
-              let posClass = 'inactive';
-              if (delta === 0) posClass = 'active';
-              else if (delta === 1) posClass = 'right-adjacent';
-              else if (delta === len - 1) posClass = 'left-adjacent';
+              let posClass = "inactive";
+              if (delta === 0) posClass = "active";
+              else if (delta === 1) posClass = "right-adjacent";
+              else if (delta === len - 1) posClass = "left-adjacent";
 
               return (
                 <div
@@ -102,7 +115,7 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
 
                     <Card.Body className="d-flex flex-column text-center">
                       <Badge className="mb-2 align-self-center tag-categoria">
-                        {slide.categoria?.nombre || 'Sin categoría'}
+                        {slide.categoria?.nombre || "Sin categoría"}
                       </Badge>
 
                       <h3>{slide.titulo}</h3>
@@ -112,7 +125,10 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
                       </Card.Text>
 
                       <div className="mt-3">
-                        <ButtonPrimary as={NavLink} to={`/historia/${slide.id}`}>
+                        <ButtonPrimary
+                          as={NavLink}
+                          to={`/historia/${slide.id}`}
+                        >
                           Leer Más
                         </ButtonPrimary>
                       </div>
@@ -126,8 +142,20 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
 
         {/* Controles */}
         <div className="cf-controls">
-          <button className="cf-arrow cf-prev" onClick={prev} aria-label="Anterior">‹</button>
-          <button className="cf-arrow cf-next" onClick={next} aria-label="Siguiente">›</button>
+          <button
+            className="cf-arrow cf-prev"
+            onClick={prev}
+            aria-label="Anterior"
+          >
+            ‹
+          </button>
+          <button
+            className="cf-arrow cf-next"
+            onClick={next}
+            aria-label="Siguiente"
+          >
+            ›
+          </button>
         </div>
 
         {/* Dots */}
@@ -135,7 +163,7 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
           {slides.map((_, i) => (
             <button
               key={i}
-              className={`cf-dot ${i === index ? 'active' : ''}`}
+              className={`cf-dot ${i === index ? "active" : ""}`}
               onClick={() => goTo(i)}
               aria-label={`Ir a historia ${i + 1}`}
             />
