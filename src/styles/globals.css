@@ -144,3 +144,15 @@ p {
     }
   }
 }
+
+.page-link{
+  color: var(--primary-color);
+  &:hover{
+    color: var(--secondary-color);
+  }
+}
+
+.active>.page-link{
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}

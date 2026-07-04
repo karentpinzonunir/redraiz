@@ -1,21 +1,24 @@
 // src/pages/Productores.jsx
 import React from "react";
-import { Row, Col, Spinner, Form, InputGroup, Container } from "react-bootstrap";
+import { Row, Col, Spinner, Form, InputGroup, Container, Pagination } from "react-bootstrap";
 import ProducerCard from "../components/ProducerCard";
 import SectionTitle from "../components/SectionTitle";
 import { useGet } from "../hooks/useGet";
 import { useSearch } from "../hooks/useSearch";
+import { usePagination } from "../hooks/usePagination";
 import "../styles/productores.css";
 
 const Productores = () => {
   const { data: productores, loading, error } = useGet("/api/productores");
   const listaProductores = Array.isArray(productores) ? productores : [];
 
-  // Buscamos en los campos relevantes de tu tabla
   const { searchTerm, setSearchTerm, filteredData, resultsCount } = useSearch(
     listaProductores,
     ["nombre", "descripcion", "historia", "carpeta"]
   );
+
+  // Paginación sobre los resultados filtrados (6 por página)
+  const { currentData, currentPage, totalPages, goToPage } = usePagination(filteredData, 6);
 
   return (
     <div>
@@ -34,10 +37,10 @@ const Productores = () => {
       {/* BUSCADOR SIMPLE */}
       <section className="pb-5">
         <div className="container-custom">
-          <div className="mx-auto buscador" >
+          <div className="mx-auto buscador">
             <InputGroup size="lg" className="shadow-sm rounded-pill overflow-hidden border">
               <InputGroup.Text className="bg-white border-0 ps-4">
-                <i class="fa-solid fa-magnifying-glass text-success"></i>
+                <i className="fa-solid fa-magnifying-glass text-success"></i>
               </InputGroup.Text>
               <Form.Control
                 type="text"
@@ -78,14 +81,41 @@ const Productores = () => {
             </div>
           )}
 
-          {!loading && !error && (
-            <Row className="g-4">
-              {filteredData.map((productor) => (
-                <Col lg={4} md={6} key={productor.id}>
-                  <ProducerCard productor={productor} />
-                </Col>
-              ))}
-            </Row>
+          {!loading && !error && filteredData.length > 0 && (
+            <>
+              <Row className="g-4">
+                {currentData.map((productor) => (
+                  <Col lg={4} md={6} key={productor.id}>
+                    <ProducerCard productor={productor} />
+                  </Col>
+                ))}
+              </Row>
+
+              {/* Paginación: solo si hay más de 6 registros */}
+              {filteredData.length > 6 && (
+                <div className="d-flex justify-content-center mt-5">
+                  <Pagination>
+                    <Pagination.Prev
+                      disabled={currentPage === 1}
+                      onClick={() => goToPage(currentPage - 1)}
+                    />
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <Pagination.Item
+                        key={page}
+                        active={page === currentPage}
+                        onClick={() => goToPage(page)}
+                      >
+                        {page}
+                      </Pagination.Item>
+                    ))}
+                    <Pagination.Next
+                      disabled={currentPage === totalPages}
+                      onClick={() => goToPage(currentPage + 1)}
+                    />
+                  </Pagination>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

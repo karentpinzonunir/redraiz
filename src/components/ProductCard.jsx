@@ -3,8 +3,8 @@ import React from "react";
 import { Card, Badge } from "react-bootstrap";
 import ButtonPrimary from "./ButtonPrimary";
 import { useImageLazy } from "../hooks/useImageLazy";
-import "../styles/catalogo.css";
 import { Link } from "react-router-dom";
+import "../styles/catalogo.css";
 
 const formatPrice = (value) => {
   if (value == null) return "";
@@ -119,12 +119,11 @@ const ProductCard = ({
                       : "/assets/productores/default.jpg"
                 }
                 alt={productor.nombre}
-                className="rounded-circle me-2"
-                style={{ width: "32px", height: "32px", objectFit: "cover" }}
+                className="rounded-circle me-2 img-productor"
               />
               <Link
                 to={`/productores/${productor.id}`}
-                className="small text-dark fw-medium text-decoration-none"
+                className="small fw-medium text-decoration-none productor-link"
                 onClick={(e) => e.stopPropagation()}
               >
                 {productor.nombre}
@@ -138,7 +137,7 @@ const ProductCard = ({
             <h5 className="price mb-0">{formatPrice(precioFinal)}</h5>
           </div>
 
-          <div style={{ minWidth: 130 }}>
+          <div>
             <ButtonPrimary onClick={handleContact} className="w-100">
               <i className="fa-brands fa-whatsapp me-2"></i>
               Contactar
