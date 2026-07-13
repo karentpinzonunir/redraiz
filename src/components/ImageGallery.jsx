@@ -1,6 +1,7 @@
 // src/components/ImageGallery.jsx
 import React, { useState } from "react";
 import { Modal, Carousel, Image, Button, Row, Col } from "react-bootstrap";
+import "../styles/productores.css";
 
 const ImageGallery = ({ images = [], basePath = "/assets/productores/", folder = "default" }) => {
     const [showModal, setShowModal] = useState(false);
@@ -29,31 +30,25 @@ const ImageGallery = ({ images = [], basePath = "/assets/productores/", folder =
                     const isPlaceholder = !img;
 
                     return (
-                        <Col sm={2} key={index}>
+                        <Col sm={2} key={index} className="d-flex justify-content-center">
+
+                            <Button
+                                variant="light"
+                                className="p-0 border-0 rounded-2 shadow-sm boton-galeria"
+                                onClick={() => openGalleryAt(index)}
+                            >
                                 {isPlaceholder ? (
-                                    <Button
-                                        variant="light"
-                                        className="p-1 border rounded-2 w-100 d-flex align-items-center justify-content-center shadow-sm boton-galeria"
-                                        disabled
-                                        style={{ height: "200px" }}
-                                    >
-                                        <i className="fa-regular fa-image text-muted" style={{ fontSize: '0.8rem' }}></i>
-                                    </Button>
+                                    <i className="fa-regular fa-image text-muted fs-5"></i>
+
                                 ) : (
-                                    <button
-                                        className="p-0 border-0 rounded-2 shadow-sm boton-galeria"
-                                        onClick={() => openGalleryAt(index)}
-                                        style={{ height: "200px"}}
-                                    >
-                                        <Image
-                                            src={url}
-                                            alt={`Thumbnail ${index}`}
-                                            className="w-100 h-100"
-                                            style={{ objectFit: "cover" }}
-                                            thumbnail
-                                        />
-                                    </button>
+                                    <Image
+                                        src={url}
+                                        alt={`Thumbnail ${index}`}
+                                        className="w-100 h-100"
+                                        thumbnail
+                                    />
                                 )}
+                            </Button>
                         </Col>
                     );
                 })}
@@ -73,11 +68,10 @@ const ImageGallery = ({ images = [], basePath = "/assets/productores/", folder =
                     >
                         {images.map((img, idx) => (
                             <Carousel.Item key={idx}>
-                                <div className="d-flex align-items-strat justify-content-center" style={{ height: "80vh" }}>
+                                <div className="d-flex align-items-strat justify-content-center galeria-productor">
                                     <Image
                                         src={getImageUrl(img)}
                                         alt={`Slide ${idx}`}
-                                        style={{ maxHeight: "100%", maxWidth: "100%", objectFit: "contain", height: "74vh" }}
                                         fluid
                                     />
                                 </div>

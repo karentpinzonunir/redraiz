@@ -40,7 +40,7 @@ const Productores = () => {
           <div className="mx-auto buscador">
             <InputGroup size="lg" className="shadow-sm rounded-pill overflow-hidden border">
               <InputGroup.Text className="bg-white border-0 ps-4">
-                <i className="fa-solid fa-magnifying-glass text-success"></i>
+                <i className="fa-solid fa-magnifying-glass text-success-redraiz"></i>
               </InputGroup.Text>
               <Form.Control
                 type="text"

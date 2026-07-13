@@ -118,3 +118,12 @@ section {
 
   z-index: 2;
 }
+
+.footer a{
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: 0.3s ease;
+  &:hover{
+    color: var(--primary-color);
+  }
+}

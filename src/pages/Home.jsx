@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
+import { Container, Image } from 'react-bootstrap';
 import Slider from "../components/Slider";
 import SectionTitle from "../components/SectionTitle";
 import CardCarousel from "../components/CardCarousel";
 import ContactForm from "../components/Contactform";
 import banner from '/assets/home/banner.png';
+import comunidad from '/assets/home/comunidad.jpg';
 import '../styles/comunidad.css';
 
 const Home = () => {
@@ -29,48 +30,30 @@ const Home = () => {
       </section>
 
       {/* COMUNIDAD */}
-      <section className="community-section">
+      <section className="py-5">
+        <Container>
+          <div className="d-grid community-grid gap-4 align-items-center">
 
-        <div className="container-custom">
-
-          <div className="community-grid">
-
-            <div>
-
-              <img
-                src="/assets/carousel/img7.jpg"
-                alt="Comunidad RedRaíz"
-                className="community-image"
-              />
-
-            </div>
-
-            <div>
-
-              <span className="section-tag">
-                Comunidad RedRaíz
-              </span>
-
-              <h2>
-                Conectamos productores locales con familias colombianas
-              </h2>
-
-              <p>
-                Impulsamos el comercio justo para que cada compra
+            <Image
+              src={comunidad}
+              alt="Comunidad RedRaíz" fluid className="rounded-5"
+            />
+            <SectionTitle
+              tag="Comunidad RedRaíz"
+              title="Conectamos productores locales con familias colombianas"
+              description="Impulsamos el comercio justo para que cada compra
                 fortalezca el trabajo del campo y apoye el crecimiento
-                de miles de familias productoras.
-              </p>
-
-            </div>
+                de miles de familias productoras."
+            />
 
           </div>
 
-        </div>
+        </Container>
 
       </section>
 
       {/* CONTACTO */}
-      <section className="section-spacing">
+      <section className="py-5">
         <ContactForm />
       </section>
     </div >

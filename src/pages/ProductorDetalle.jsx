@@ -152,7 +152,7 @@ const ProductorDetalle = () => {
 
               {productor.historia && (
                 <div className="d-flex align-items-center text-muted">
-                  <i className="fa-solid fa-quote-left text-success fs-1 opacity-50"></i>
+                  <i className="fa-solid fa-quote-left text-success-redraiz fs-1 opacity-50"></i>
                   <p className="fst-italic ms-3 mb-0 d-inline text-muted">"{productor.historia}"</p>
                 </div>
               )}
@@ -224,13 +224,13 @@ const ProductorDetalle = () => {
 
       <section className="py-5">
         <Container>
-          <div className="rounded overflow-hidden shadow" style={{ height: "480px" }}>
+          <div className="rounded overflow-hidden shadow producer-detalle">
             <iframe
               title="Mapa"
               src={mapSrc}
               width="100%"
               height="100%"
-              style={{ border: 0 }}
+              className="border-0"
               loading="lazy"
             />
           </div>

@@ -126,7 +126,7 @@ const Catalogo = () => {
           <Card className="border shadow-sm bg-secondary-subtle">
             <Card.Body>
               <div className="d-flex justify-content-between align-items-center mb-3">
-                <span className="fw-semibold text-success">
+                <span className="fw-semibold text-success-redraiz">
                   <i className="fa-solid fa-sliders me-2"></i>Filtros
                 </span>
                 {hayFiltros && (
@@ -202,7 +202,7 @@ const Catalogo = () => {
           <div className="mx-auto buscador">
             <InputGroup size="lg" className="shadow-sm rounded-pill overflow-hidden border">
               <InputGroup.Text className="bg-white border-0 ps-4">
-                <i className="fa-solid fa-magnifying-glass text-success"></i>
+                <i className="fa-solid fa-magnifying-glass text-success-redraiz"></i>
               </InputGroup.Text>
               <Form.Control
                 type="text"

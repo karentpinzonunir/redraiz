@@ -156,7 +156,7 @@ export default function SubscriptionModal({ show, onHide }) {
         ) : (
           // ── Mensaje de éxito (reemplaza el formulario) ───────────
           <div className="text-center py-5">
-            <div className="mb-3" style={{ fontSize: "3rem" }}>
+            <div className="mb-3 fs-1">
               ✅
             </div>
             <h4 className="fw-bold">¡Suscripción Exitosa!</h4>

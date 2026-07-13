@@ -1,217 +1,148 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Row, Col, Card } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import {
+  Container,
+  Row,
+  Col,
+  Spinner,
+  Alert,
+  Badge,
+} from "react-bootstrap";
 
-import "../styles/blog.css";
 
+import { useGet } from "../hooks/useGet";
 import SectionTitle from "../components/SectionTitle";
 import ButtonPrimary from "../components/ButtonPrimary";
-
-import historias from "../data/historias";
+import BlogCard from "../components/BlogCard";
 
 const Blog = () => {
+  const { data, loading, error } = useGet("/api/historias");
+  const { data: destacada, loading: loadingDestacada } = useGet("/api/historias/destacada");
 
-return (
+  const historias = Array.isArray(data) ? data : [];
 
-<div className="blog-page">
+  if (loading || loadingDestacada) {
+    return (
+      <Container className="my-5 text-center">
+        <Spinner animation="border" variant="success" />
+      </Container>
+    );
+  }
 
-  {/* Hero */}
+  if (error) {
+    return (
+      <Container className="my-5">
+        <Alert variant="danger">Error: {String(error)}</Alert>
+      </Container>
+    );
+  }
 
-  <section className="blog-hero">
+  return (
+    <div>
 
-    <div className="container-custom">
-
-      <SectionTitle
-
-        tag="Blog"
-
-        title="Historias que nacen en el campo"
-
-        description="Descubre consejos, historias de productores y contenidos sobre alimentación consciente."
-
-        center
-
-      />
-
-    </div>
-
-  </section>
-
-
-
-  {/* Artículo destacado */}
-
-  <section className="featured-post">
-
-    <div className="container-custom">
-
-      <Row className="align-items-center g-5">
-
-        <Col lg={6}>
-
-          <img
-
-            src={historias[0].imagen}
-
-            alt={historias[0].titulo}
-
-            className="featured-image"
-
+      {/* Hero */}
+      <section className="py-5 text-center">
+        <Container>
+          <SectionTitle
+            tag="Blog"
+            title="Historias que nacen en el campo"
+            description="Descubre consejos, historias de productores y contenidos sobre alimentación consciente."
+            center
           />
+        </Container>
+      </section>
 
-        </Col>
-
-
-
-        <Col lg={6}>
-
-          <span className="section-tag">
-
-            Artículo destacado
-
-          </span>
-
-
-
-          <h2 className="featured-title">
-
-            {historias[0].titulo}
-
-          </h2>
-
-
-
-          <p>
-
-            {historias[0].resumen}
-
-          </p>
-
-
-
-          <div className="mt-3">
-
-            <Link
-
-              to={`/blog/${historias[0].id}`}
-
-              style={{ textDecoration: "none" }}
-
-            >
-
-              <ButtonPrimary>
-
-                Leer Más
-
-              </ButtonPrimary>
-
-            </Link>
-
-          </div>
-
-        </Col>
-
-      </Row>
-
-    </div>
-
-  </section>
-
-
-
-  {/* Todas las historias */}
-
-  <section className="blog-grid">
-
-    <div className="container-custom">
-
-      <Row className="g-4">
-
-        {
-
-          historias.map((articulo) => (
-
-            <Col
-
-              lg={4}
-
-              md={6}
-
-              key={articulo.id}
-
-            >
-
-              <Card className="blog-card">
-
-                <Card.Img
-
-                  variant="top"
-
-                  src={articulo.imagen}
-
+      {/* Artículo destacado */}
+      {destacada && (
+        <section className="pb-5">
+          <Container>
+            <Row className="align-items-center g-5">
+              <Col lg={6}>
+                <img
+                  src={`assets/historias/${destacada.imagen}`}
+                  alt={destacada.titulo}
+                  className="featured-image w-100 rounded-4"
                 />
+              </Col>
 
+              <Col lg={6} className="d-flex flex-column">
+                <span className="section-tag mb-2">Artículo destacado</span>
 
+                {destacada.categorias?.nombre && (
+                  <Badge className="mb-2 align-self-start tag-categoria">
+                    {destacada.categorias.nombre}
+                  </Badge>
+                )}
 
-                <Card.Body>
+                <h2>{destacada.titulo}</h2>
 
-                  <Card.Title>
+                <p className="text-muted">
+                  <i className="fa-regular fa-calendar me-2"></i>
+                  {new Date(destacada.fecha).toLocaleDateString("es-CO", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                  {destacada.autor && (
+                    <span className="ms-3">
+                      <i className="fa-regular fa-user me-2"></i>
+                      {destacada.autor}
+                    </span>
+                  )}
+                </p>
 
-                    {articulo.titulo}
+                <p>{destacada.resumen}</p>
 
-                  </Card.Title>
-
-
-
-                  <Card.Text>
-
-                    {articulo.descripcion}
-
-                  </Card.Text>
-
-
-
-                  <Link
-
-                    to={`/blog/${articulo.id}`}
-
-                    style={{
-
-                      textDecoration:"none"
-
-                    }}
-
+                <div className="mt-3">
+                  <NavLink
+                    to={`/blog/${destacada.id}`}
+                    className="text-decoration-none"
                   >
-
-                    <ButtonPrimary>
-
+                    <ButtonPrimary
+                      as="button"
+                      onClick={(e) => e.stopPropagation()}
+                      className="stretched-link"
+                    >
                       Leer Más
-
                     </ButtonPrimary>
+                  </NavLink>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
 
-                  </Link>
+      {/* Todas las historias */}
+      <section className="py-5 text-center">
+        <Container>
+          <SectionTitle
+            tag="Todas las historias"
+            title="Más historias del campo"
+            description=""
+            center
+          />
+        </Container>
+      </section>
 
-                </Card.Body>
-
-              </Card>
-
-            </Col>
-
-          ))
-
-        }
-
-      </Row>
+      <section>
+        <Container>
+          {historias.length === 0 ? (
+            <p className="text-center text-muted">No hay historias disponibles.</p>
+          ) : (
+            <Row className="g-4 pt-3">
+              {historias.map((articulo) => (
+                <Col lg={4} md={6} key={articulo.id}>
+                  <BlogCard articulo={articulo} />
+                </Col>
+              ))}
+            </Row>
+          )}
+        </Container>
+      </section>
 
     </div>
-
-  </section>
-
-</div>
-
-
-);
-
+  );
 };
 
 export default Blog;

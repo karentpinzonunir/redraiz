@@ -41,19 +41,13 @@ body {
   background: white;
   color: var(--text-color);
   background-color: #f5f5f5;
-
-  /* FONDO PREMIUM */
   background-image:
     linear-gradient(rgba(245, 245, 245, 0.88),
       rgba(245, 245, 245, 0.88)),
     url('/assets/fondo.png');
-
   background-repeat: repeat;
-
   background-size: 650px;
-
   background-position: top center;
-
   background-attachment: fixed;
 }
 
@@ -87,6 +81,10 @@ h3 {
 p {
   font-size: 1rem;
   color: var(--text-color);
+}
+
+.contenedor--raiz {
+  min-height: 50vh;
 }
 
 .section-tag {
@@ -126,6 +124,17 @@ p {
   transition: transform .5s ease;
 }
 
+.redraiz-card,
+.boton-galeria {
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+
+.redraiz-card:hover,
+.boton-galeria:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.10) !important;
+}
+
 .redraiz-card:hover .producer-image,
 .redraiz-card:hover .product-image,
 .boton-galeria:hover img {
@@ -145,14 +154,19 @@ p {
   }
 }
 
-.page-link{
+.page-link {
   color: var(--primary-color);
-  &:hover{
+
+  &:hover {
     color: var(--secondary-color);
   }
 }
 
-.active>.page-link{
+.active>.page-link {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
+}
+
+.text-success-redraiz {
+  color: var(--primary-color) !important;
 }

@@ -73,7 +73,7 @@ const ProductCard = ({
   };
 
   return (
-    <Card className="product-card h-100 border-0 rounded-4 overflow-hidden bg-white shadow-sm">
+    <Card className="redraiz-card product-card h-100 border-0 rounded-4 overflow-hidden bg-white shadow-sm">
       <div className="product-image-wrapper p-2">
         <Card.Img
           variant="top"

@@ -71,7 +71,7 @@ const ContactForm = () => {
   }
 
   return (
-    <div className="bg-white rounded-5 py-5">
+    <div className="bg-white rounded-5 py-5 shadow-sm">
       <div className="w-75 mx-auto">
         <h3 className="fw-bold mb5 text-center">Cuéntanos sobre tu producción</h3>
 

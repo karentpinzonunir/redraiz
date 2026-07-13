@@ -1,233 +1,238 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
-import { Row, Col, Card } from "react-bootstrap";
+import { useParams, NavLink } from "react-router-dom";
+import {
+  Container,
+  Row,
+  Col,
+  Spinner,
+  Alert,
+  Badge,
+  Breadcrumb,
+} from "react-bootstrap";
 
-import ButtonPrimary from "../components/ButtonPrimary";
-import Comentarios from "../components/Comentarios";
-
-import historias from "../data/historias";
+import { useGet } from "../hooks/useGet";
+import SectionTitle from "../components/SectionTitle";
+import BlogCard from "../components/BlogCard";
+import ComentarioForm from "../components/ComentarioForm";
 
 import "../styles/blogDetalle.css";
 
 const HistoriaDetalle = () => {
-
   const { id } = useParams();
 
-  const historia = historias.find(
-    (h) => h.id === Number(id)
+  const { data: historia, loading, error } = useGet(`/api/historias/${id}`);
+
+  const { data: comentariosData, loading: loadingComentarios } = useGet(
+    `/api/historias/${id}/comentarios`
   );
 
-  if (!historia) {
+  const { data: historiasRelacionadasData, loading: loadingRelacionadas } =
+    useGet("/api/historias?limit=3");
 
+  const comentarios = Array.isArray(comentariosData) ? comentariosData : [];
+
+  const historiasRelacionadas = Array.isArray(historiasRelacionadasData)
+    ? historiasRelacionadasData : [];
+
+  if (loading) {
     return (
-
-      <div className="historia-error">
-
-        <h1>
-          Historia no encontrada
-        </h1>
-
-        <Link
-          to="/blog"
-          className="btn-volver"
-        >
-          Volver al Blog
-        </Link>
-
-      </div>
-
+      <Container className="my-5 text-center">
+        <Spinner animation="border" variant="success" />
+      </Container>
     );
+  }
 
+  if (error || !historia) {
+    return (
+      <Container className="my-5">
+        <Alert variant="danger">Historia no encontrada.</Alert>
+      </Container>
+    );
   }
 
   return (
+    <div>
+      {/* Miga de pan */}
+      <section className="pt-5">
+        <Container>
+          <Breadcrumb>
+            <Breadcrumb.Item linkAs={NavLink} linkProps={{ to: "/" }}>
+              Inicio
+            </Breadcrumb.Item>
 
-    <div className="historia-detalle">
+            <Breadcrumb.Item linkAs={NavLink} linkProps={{ to: "/blog" }}>
+              Blog
+            </Breadcrumb.Item>
 
-      {/* Encabezado */}
+            <Breadcrumb.Item active>{historia.titulo}</Breadcrumb.Item>
+          </Breadcrumb>
+        </Container>
+      </section>
 
-      <section className="banner-blog">
+      {/* Título / Hero */}
+      <section className="py-5 text-center">
+        <Container>
+          <SectionTitle
+            tag="Blog"
+            title={historia.titulo}
+            description={`${new Date(historia.fecha).toLocaleDateString(
+              "es-CO",
+              {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              }
+            )}${historia.autor ? `  •  ${historia.autor}` : ""}`}
+            center
+          />
 
-        <span>
-          BLOG
-        </span>
-
-        <h1>
-          {historia.titulo}
-        </h1>
-
-        <div className="info-blog">
-
-          <p>{historia.fecha}</p>
-
-          <p>•</p>
-
-          <p>{historia.autor}</p>
-
-        </div>
-
+          {historia.categorias?.nombre && (
+            <Badge className="tag-categoria mt-2">
+              {historia.categorias.nombre}
+            </Badge>
+          )}
+        </Container>
       </section>
 
       {/* Imagen principal */}
-
-      <section className="imagen-blog">
-
-        <img
-          src={historia.imagen}
-          alt={historia.titulo}
-          className="featured-image"
-        />
-
+      <section className="pb-5">
+        <Container>
+          <Row className="justify-content-center">
+            <Col lg={9}>
+              <img
+                src={`/assets/historias/${historia.imagen}`}
+                alt={historia.titulo}
+                className="w-100 rounded-4 shadow-sm img-historia"
+              />
+            </Col>
+          </Row>
+        </Container>
       </section>
 
       {/* Resumen */}
-
-      <section className="contenido-blog">
-
-        <p className="resumen">
-
-          {historia.resumen}
-
-        </p>
-
+      <section className="pb-4">
+        <Container>
+          <Row className="justify-content-center">
+            <Col lg={8}>
+              <p className="fs-5 fst-italic text-muted border-start border-4 ps-4">
+                {historia.resumen}
+              </p>
+            </Col>
+          </Row>
+        </Container>
       </section>
 
-      {/* Contenido de la historia */}
-
-      <section className="contenido-blog">
-
-        {
-
-          historia.contenido
-
-            .split("\n")
-
-            .map(
-
-              (parrafo, index) =>
-
-                parrafo.trim() !== "" && (
-
-                  <p
-                    key={index}
-                    className="texto-seccion"
-                  >
-
+      {/* Contenido */}
+      <section className="pb-4">
+        <Container>
+          <Row className="justify-content-center">
+            <Col lg={8} className="bg-white p-3 rounded-4 shadow-sm">
+              {historia.contenido
+                ?.split("\n")
+                .filter((p) => p.trim() !== "")
+                .map((parrafo, index) => (
+                  <p key={index} className="mb-4 lh-lg">
                     {parrafo}
-
                   </p>
-
-                )
-
-            )
-
-        }
-
-      </section>
-
-      {/* Más historias */}
-
-      <section className="historias-relacionadas">
-
-        <h3>
-          Más historias
-        </h3>
-
-        <Row className="g-4">
-
-          {
-
-            historias
-
-              .filter(
-                (h) => h.id !== historia.id
-              )
-
-              .slice(0, 3)
-
-              .map((h) => (
-
-                <Col
-                  lg={4}
-                  md={6}
-                  key={h.id}
-                >
-
-                  <Card className="blog-card">
-
-                    <Card.Img
-                      variant="top"
-                      src={h.imagen}
-                    />
-
-                    <Card.Body>
-
-                      <Card.Title>
-
-                        {h.titulo}
-
-                      </Card.Title>
-
-                      <Card.Text>
-
-                        {h.descripcion}
-
-                      </Card.Text>
-
-                      <Link
-                        to={`/blog/${h.id}`}
-                        style={{
-                          textDecoration: "none"
-                        }}
-                      >
-
-                        <ButtonPrimary>
-
-                          Leer Más
-
-                        </ButtonPrimary>
-
-                      </Link>
-
-                    </Card.Body>
-
-                  </Card>
-
-                </Col>
-
-              ))
-
-          }
-
-        </Row>
-
+                ))}
+            </Col>
+          </Row>
+        </Container>
       </section>
 
       {/* Comentarios */}
+      <section className="py-5">
+        <Container>
+          <Row className="justify-content-center">
+            <Col lg={8}>
+              <h4 className="fw-bold mb-4">
+                <i className="fa-regular fa-comments me-2 text-success-redraiz"></i>
+                Comentarios ({comentarios.length})
+              </h4>
 
-      <Comentarios
-        historiaId={historia.id}
-      />
+              {loadingComentarios ? (
+                <Spinner animation="border" variant="success" size="sm" />
+              ) : comentarios.length === 0 ? (
+                <p className="text-muted">Sé el primero en comentar.</p>
+              ) : (
+                <div className="d-flex flex-column gap-3 mb-5">
+                  {comentarios.map((c) => (
+                    <div
+                      key={c.id}
+                      className="bg-light rounded-4 p-4 shadow-sm"
+                    >
+                      <div className="d-flex align-items-center gap-2 mb-2">
+                        <div
+                          className="rounded-circle text-white d-flex align-items-center justify-content-center fw-bold icon-nombre"
+                        >
+                          {c.nombre ? c.nombre.charAt(0).toUpperCase() : "A"}
+                        </div>
 
-      {/* Botón volver */}
+                        <div>
+                          <p className="mb-0 fw-semibold">
+                            {c.nombre || "Anónimo"}
+                          </p>
 
-      <div className="volver-blog">
+                          {c.fecha && (
+                            <small className="text-muted">
+                              {new Date(c.fecha).toLocaleDateString("es-CO", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              })}
+                            </small>
+                          )}
+                        </div>
+                      </div>
 
-        <Link
-          to="/blog"
-          className="btn-volver"
-        >
+                      <p className="mb-0 text-secondary">{c.comentario}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
 
-          ← Volver al Blog
+              {/* Formulario de comentario */}
+              <div className="bg-white rounded-4 p-4 shadow-sm">
+                <ComentarioForm historiaId={historia.id} />
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
 
-        </Link>
+      {/* Más historias */}
+      <section className="py-5">
+        <Container>
+          <SectionTitle
+            tag="Sigue explorando"
+            title="Más historias del campo"
+            description="Conoce otras historias, experiencias y saberes de nuestra comunidad."
+            center
+          />
 
-      </div>
-
+          <div className="pt-4">
+            {loadingRelacionadas ? (
+              <div className="text-center">
+                <Spinner animation="border" variant="success" />
+              </div>
+            ) : historiasRelacionadas.length === 0 ? (
+              <p className="text-center text-muted">
+                No hay más historias disponibles.
+              </p>
+            ) : (
+              <Row className="g-4 justify-content-center">
+                {historiasRelacionadas.map((articulo) => (
+                  <Col lg={4} md={6} key={articulo.id}>
+                    <BlogCard articulo={articulo} />
+                  </Col>
+                ))}
+              </Row>
+            )}
+          </div>
+        </Container>
+      </section>
     </div>
-
   );
-
 };
 
 export default HistoriaDetalle;

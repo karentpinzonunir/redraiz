@@ -5,6 +5,7 @@ import {
   Col,
   Form,
   Button,
+  Container
 } from "react-bootstrap";
 
 import SectionTitle from "../components/SectionTitle";
@@ -17,9 +18,9 @@ const Contacto = () => {
     <div className="contact-page">
 
       {/* HERO */}
-      <section className="contact-hero">
+      <section className="py-5">
 
-        <div className="container-custom">
+        <Container>
 
           <SectionTitle
             tag="Contacto"
@@ -28,7 +29,7 @@ const Contacto = () => {
             center={true}
           />
 
-        </div>
+        </Container>
 
       </section>
 

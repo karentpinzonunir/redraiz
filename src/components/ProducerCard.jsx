@@ -51,7 +51,7 @@ const ProducerCard = ({ productor }) => {
             {regionLabel}
           </span>
 
-          <Card.Title className="fw-black fs-4 redraiz-card-title mb-3">
+          <Card.Title className="fw-bold">
             {productor?.nombre}
           </Card.Title>
 

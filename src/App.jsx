@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Productores from "./pages/Productores";
 import ProductorDetalle from "./pages/ProductorDetalle";
 import Catalogo from "./pages/Catalogo";
-import ProductoDetalle from "./pages/ProductoDetalle";
 import Blog from "./pages/Blog";
 import HistoriaDetalle from "./pages/HistoriaDetalle";
 import Contacto from "./pages/Contacto";
@@ -26,21 +25,19 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
-  <Route path="/productores" element={<Productores />} />
+          <Route path="/productores" element={<Productores />} />
 
-  <Route path="/productores/:id" element={<ProductorDetalle />} />
+          <Route path="/productores/:id" element={<ProductorDetalle />} />
 
-  <Route path="/catalogo" element={<Catalogo />} />
+          <Route path="/catalogo" element={<Catalogo />} />
 
-  <Route path="/catalogo/:id" element={<ProductoDetalle />} />
+          <Route path="/blog" element={<Blog />} />
 
-  <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<HistoriaDetalle />} />
 
-  <Route path="/blog/:id" element={<HistoriaDetalle />} />
+          <Route path="/contacto" element={<Contacto />} />
 
-  <Route path="/contacto" element={<Contacto />} />
-
-  <Route path="/busqueda" element={<Busqueda />} />
+          <Route path="/busqueda" element={<Busqueda />} />
         </Routes>
       </Container>
       <Footer />

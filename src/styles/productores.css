@@ -1,22 +1,30 @@
-/* ── Hover card ── */
-.redraiz-card,
-.boton-galeria {
-  transition: transform .4s ease, box-shadow .4s ease;
-}
 
-.redraiz-card:hover,
-.boton-galeria:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.10) !important;
-}
-
-/* ── Imagen con zoom ── */
 .producer-image-wrapper {
   height: 520px;
 }
 
 .producer-image {
   object-fit: cover;
+}
+
+.boton-galeria {
+  height: 200px;
+  min-width: 120px;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.galeria-productor {
+  height: 80vh;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    height: 74vh;
+  }
 }
 
 /* ── Responsive ── */
