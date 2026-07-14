@@ -22,7 +22,7 @@ const ContactForm = () => {
   const tipo_producto = useFormField('', (v) => !v ? 'Selecciona un tipo de producto.' : null);
   const historia = useFormField('', (v) => !v.trim() ? 'Campo requerido.' : null);
 
-  const { data: tipos, loading: loadingTipos } = useGet('/api/tipo-productos');
+  const { data: tipos, loading: loadingTipos } = useGet('/api/tipo_productos');
   const { post, loading: sending, error } = usePost('/api/contacto');
 
   const allFields = [nombre, apellido, nombre_finca, ciudad, telefono, correo, tipo_producto, historia];
