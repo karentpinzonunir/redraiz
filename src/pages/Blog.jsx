@@ -23,7 +23,7 @@ const Blog = () => {
 
   if (loading || loadingDestacada) {
     return (
-      <Container className="my-3 my-lg-5 text-center">
+      <Container className="contenedor--raiz my-3 my-lg-5 text-center">
         <Spinner animation="border" variant="success" />
       </Container>
     );
@@ -31,7 +31,7 @@ const Blog = () => {
 
   if (error) {
     return (
-      <Container className="my-3 my-lg-5">
+      <Container className="contenedor--raiz my-3 my-lg-5">
         <Alert variant="danger">Error: {String(error)}</Alert>
       </Container>
     );
