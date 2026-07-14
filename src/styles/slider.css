@@ -1,12 +1,14 @@
 .slide-home,
-.carousel .carousel-item > div {
+.carousel .carousel-item>div {
   min-height: 50vh;
 }
+
 .carousel {
-  .carousel-item > div {
+  .carousel-item>div {
     min-height: 45vh;
 
     p {
+      font-size: 1.25rem;
       line-height: 1.7;
       max-width: 600px;
     }
@@ -32,4 +34,11 @@
   .carousel-indicators [data-bs-target] {
     background-color: rgba(0, 0, 0, 0.25);
   }
+}
+
+@media (max-width: 991px) {
+  .carousel .carousel-item>div p {
+    font-size: 1rem;
+  }
+
 }

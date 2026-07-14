@@ -1,4 +1,3 @@
-// hooks/useFilteredData.js
 import { useMemo, useState } from "react";
 
 const normalizeText = (value = "") =>

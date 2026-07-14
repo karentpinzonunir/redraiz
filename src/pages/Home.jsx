@@ -11,15 +11,15 @@ import '../styles/comunidad.css';
 const Home = () => {
   return (
     <div>
-      <section className="py-5">
+      <section className="py-3 py-lg-5">
         <Slider />
       </section>
-      <section className="py-5">
+      <section className="py-3 py-lg-5">
         <Image
           src={banner} alt="Banner" fluid className="rounded-5"
         />
       </section>
-      <section className="py-5">
+      <section className="py-3 py-lg-5">
         <SectionTitle
           tag="Historias del campo"
           title="Gracias por alimentar a Colombia"
@@ -29,11 +29,9 @@ const Home = () => {
         <CardCarousel interval={6000} />
       </section>
 
-      {/* COMUNIDAD */}
-      <section className="py-5">
+      <section className="py-3 py-lg-5">
         <Container>
           <div className="d-grid community-grid gap-4 align-items-center">
-
             <Image
               src={comunidad}
               alt="Comunidad RedRaíz" fluid className="rounded-5"
@@ -45,15 +43,11 @@ const Home = () => {
                 fortalezca el trabajo del campo y apoye el crecimiento
                 de miles de familias productoras."
             />
-
           </div>
-
         </Container>
-
       </section>
 
-      {/* CONTACTO */}
-      <section className="py-5">
+      <section className="py-3 py-lg-5">
         <ContactForm />
       </section>
     </div >

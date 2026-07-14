@@ -18,9 +18,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <header className="fixed-top">
-        <Header />
-      </header>
+      <Header />
       <Container className="mt-5 pt-5 pb-3 contenedor--raiz">
         <Routes>
           <Route path="/" element={<Home />} />

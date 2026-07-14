@@ -1,4 +1,3 @@
-// ContactForm.jsx
 import React, { useState } from "react";
 import { Form, Row, Col, FloatingLabel, Alert, Spinner } from "react-bootstrap";
 import ButtonPrimary from './ButtonPrimary';
@@ -10,11 +9,9 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ContactForm = () => {
   const [success, setSuccess] = useState(false);
-
-  // ── 1. Hooks de estado por campo (Validación en tiempo real) ─────
   const nombre = useFormField('', (v) => !v.trim() ? 'El nombre es requerido.' : null);
-  const apellido = useFormField('', null); // Opcional
-  const nombre_finca = useFormField('', null); // Opcional
+  const apellido = useFormField('', null);
+  const nombre_finca = useFormField('', null);
   const ciudad = useFormField('', (v) => !v.trim() ? 'La ciudad es requerida.' : null);
   const telefono = useFormField('', (v) => !v.trim() ? 'El teléfono es requerido.' : null);
   const correo = useFormField('', (v) => {
@@ -25,20 +22,14 @@ const ContactForm = () => {
   const tipo_producto = useFormField('', (v) => !v ? 'Selecciona un tipo de producto.' : null);
   const historia = useFormField('', (v) => !v.trim() ? 'Campo requerido.' : null);
 
-  // ── 2. Hooks de API ──────────────────────────────────────────────
   const { data: tipos, loading: loadingTipos } = useGet('/api/tipo-productos');
   const { post, loading: sending, error } = usePost('/api/contacto');
 
   const allFields = [nombre, apellido, nombre_finca, ciudad, telefono, correo, tipo_producto, historia];
 
-  // ── 3. Manejo del Envío ──────────────────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Marcamos todos como "tocados" para mostrar los errores visualmente
     allFields.forEach(f => f.onBlur());
-
-    // Validamos solo los campos obligatorios
     const requiredFields = [nombre, ciudad, telefono, correo, tipo_producto, historia];
     const hasErrors = requiredFields.some(f => f.isInvalid || (!f.isValid && f.value === ''));
 

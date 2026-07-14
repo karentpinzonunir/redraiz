@@ -1,4 +1,3 @@
-// hooks/useFormField.js
 import { useState } from 'react';
 
 export function useFormField(initialValue = '', validate) {

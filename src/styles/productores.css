@@ -1,4 +1,3 @@
-
 .producer-image-wrapper {
   height: 520px;
 }
@@ -27,7 +26,6 @@
   }
 }
 
-/* ── Responsive ── */
 @media (max-width: 992px) {
   .producer-image-wrapper {
     height: 380px;

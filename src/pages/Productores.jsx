@@ -1,4 +1,3 @@
-// src/pages/Productores.jsx
 import React from "react";
 import { Row, Col, Spinner, Form, InputGroup, Container, Pagination } from "react-bootstrap";
 import ProducerCard from "../components/ProducerCard";
@@ -17,13 +16,11 @@ const Productores = () => {
     ["nombre", "descripcion", "historia", "carpeta"]
   );
 
-  // Paginación sobre los resultados filtrados (6 por página)
   const { currentData, currentPage, totalPages, goToPage } = usePagination(filteredData, 6);
 
   return (
     <div>
-      {/* HERO */}
-      <section className="py-5 text-center">
+      <section className="py-3 py-lg-5 text-center">
         <Container>
           <SectionTitle
             tag="Nuestros productores"
@@ -34,7 +31,6 @@ const Productores = () => {
         </Container>
       </section>
 
-      {/* BUSCADOR SIMPLE */}
       <section className="pb-5">
         <div className="container-custom">
           <div className="mx-auto buscador">
@@ -60,23 +56,22 @@ const Productores = () => {
         </div>
       </section>
 
-      {/* GRID */}
       <section className="pb-5">
         <div className="container-custom">
           {loading && (
-            <div className="text-center py-5">
+            <div className="text-center py-3 py-lg-5">
               <Spinner animation="border" variant="success" />
             </div>
           )}
 
           {error && (
-            <div className="text-center py-5 text-danger">
+            <div className="text-center py-3 py-lg-5 text-danger">
               <p>Error al cargar los productores: {String(error)}</p>
             </div>
           )}
 
           {!loading && !error && filteredData.length === 0 && (
-            <div className="text-center py-5 gray-text">
+            <div className="text-center py-3 py-lg-5 gray-text">
               <p className="fs-5">No encontramos productores que coincidan con tu búsqueda.</p>
             </div>
           )}
@@ -91,7 +86,6 @@ const Productores = () => {
                 ))}
               </Row>
 
-              {/* Paginación: solo si hay más de 6 registros */}
               {filteredData.length > 6 && (
                 <div className="d-flex justify-content-center mt-5">
                   <Pagination>

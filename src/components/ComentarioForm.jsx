@@ -9,7 +9,7 @@ const ComentarioForm = ({ historiaId }) => {
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  const nombre = useFormField("", null); // opcional
+  const nombre = useFormField("", null);
   const comentario = useFormField("", (v) =>
     !v.trim() ? "El comentario es requerido." : null
   );
@@ -61,7 +61,6 @@ const ComentarioForm = ({ historiaId }) => {
       <Form noValidate onSubmit={handleSubmit}>
         <Row className="g-3">
 
-          {/* Nombre (opcional) */}
           <Col xs={12}>
             <FloatingLabel controlId="nombre" label="Nombre (opcional)">
               <Form.Control
@@ -76,7 +75,6 @@ const ComentarioForm = ({ historiaId }) => {
             </FloatingLabel>
           </Col>
 
-          {/* Comentario (requerido) */}
           <Col xs={12}>
             <Form.Group controlId="comentario">
               <Form.Control
@@ -97,7 +95,6 @@ const ComentarioForm = ({ historiaId }) => {
             </Form.Group>
           </Col>
 
-          {/* Error general */}
           {errorMsg && (
             <Col xs={12}>
               <Alert variant="danger" className="rounded-3 py-2 mb-0">
@@ -106,7 +103,6 @@ const ComentarioForm = ({ historiaId }) => {
             </Col>
           )}
 
-          {/* Botón */}
           <Col xs={12}>
             <ButtonPrimary type="submit" disabled={sending}>
               {sending ? (

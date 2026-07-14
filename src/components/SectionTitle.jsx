@@ -18,7 +18,7 @@ const SectionTitle = ({
       </h2>
 
       {description && (
-        <p className="mt-3 fs-5">
+        <p className="mt-3 description-tittle">
           {description}
         </p>
       )}

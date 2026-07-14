@@ -1,4 +1,3 @@
-// src/hooks/useImageLazy.js
 import { useEffect, useState } from "react";
 
 const DEFAULT_PLACEHOLDER =

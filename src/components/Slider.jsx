@@ -1,4 +1,3 @@
-// Slider.jsx
 import React, { useState } from "react";
 import { Carousel, Row, Col, Image, Spinner } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
@@ -9,7 +8,6 @@ import { useInterval } from "../hooks/useInterval";
 import { useWindowSize } from "../hooks/useWindowSize";
 import "../styles/slider.css";
 
-// Componente para renderizar botones según su tipo
 const SlideButton = ({ boton }) => {
   if (!boton) return null;
 
@@ -41,24 +39,19 @@ export default function Slider({ id = 1 }) {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-
-  // Disponible para lógica condicional por breakpoint si se necesita
   const { width } = useWindowSize();
 
   const slides = slider?.slides ?? [];
 
-  // ── useInterval reemplaza el autoplay nativo de Bootstrap ─────────
   useInterval(
     () => setActiveIndex((i) => (i + 1) % slides.length),
     !isPaused && slides.length > 0 ? (slider?.interval ?? 4000) : null,
   );
 
-  // ── Navegación manual ─────────────────────────────────────────────
   const handleSelect = (selectedIndex) => {
     setActiveIndex(selectedIndex);
   };
 
-  // ── Estados de carga ──────────────────────────────────────────────
   if (loading)
     return (
       <div className="slide-home d-flex justify-content-center align-items-center">
@@ -71,48 +64,46 @@ export default function Slider({ id = 1 }) {
   if (error) return <p>Error: {error}</p>;
   if (!slider || slides.length === 0) return null;
 
-  // ── Render ────────────────────────────────────────────────────────
   return (
-      <Carousel
-        controls
-        indicators
-        interval={null} // Desactivamos autoplay nativo de Bootstrap
-        activeIndex={activeIndex} // Índice controlado por estado
-        onSelect={handleSelect} // Sincroniza navegación manual
-        pause={false} // Nosotros manejamos la pausa
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        {slides.map((slide) => (
-          <Carousel.Item key={slide.id} className="pb-5 px-5">
-            <Row className="align-items-center slider-item px-3">
-              <Col md={7} className="pe-5">
-                <h1
-                  className="text-start"
-                  dangerouslySetInnerHTML={{ __html: slide.titulo }}
-                />
-                <p
-                  className="fs-5"
-                  dangerouslySetInnerHTML={{ __html: slide.descripcion }}
-                />
-                <div className="slider-buttons">
-                  <SlideButton boton={slide.boton1} />
-                  <SlideButton className="ms-2" boton={slide.boton2} />
-                </div>
-              </Col>
-              <Col
-                md={5}
-                className="text-center rounded-5 d-flex justify-content-center align-items-center overflow-hidden div-image"
-              >
-                <Image
-                  src={`/assets/${slider.carpeta}/${slide.imagen}`}
-                  alt={slide.titulo}
-                  className="img-fluid"
-                />
-              </Col>
-            </Row>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+    <Carousel
+      controls
+      indicators
+      interval={null}
+      activeIndex={activeIndex}
+      onSelect={handleSelect}
+      pause={false}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {slides.map((slide) => (
+        <Carousel.Item key={slide.id} className="pb-5 px-3 px-lg-5">
+          <Row className="align-items-center slider-item px-3">
+            <Col md={7} className="px-0 pe-lg-5 order-2 0rder-lg-1">
+              <h1
+                className="text-start"
+                dangerouslySetInnerHTML={{ __html: slide.titulo }}
+              />
+              <p
+                dangerouslySetInnerHTML={{ __html: slide.descripcion }}
+              />
+              <div>
+                <SlideButton boton={slide.boton1} />
+                <SlideButton className="ms-2" boton={slide.boton2} />
+              </div>
+            </Col>
+            <Col
+              md={5}
+              className="text-center rounded-5 d-flex justify-content-center align-items-center overflow-hidden div-image p-0 mb-3 mb-lg-0 order-1 order-lg-2"
+            >
+              <Image
+                src={`/assets/${slider.carpeta}/${slide.imagen}`}
+                alt={slide.titulo}
+                className="img-fluid"
+              />
+            </Col>
+          </Row>
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 }

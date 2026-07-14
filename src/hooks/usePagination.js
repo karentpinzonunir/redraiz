@@ -1,4 +1,3 @@
-// src/hooks/usePagination.js
 import { useState, useEffect, useMemo } from "react";
 
 export function usePagination(data = [], itemsPerPage = 6) {
@@ -18,7 +17,7 @@ export function usePagination(data = [], itemsPerPage = 6) {
     const goToPage = (page) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
-            window.scrollTo({ top: 0, behavior: "smooth" }); // ← esto es todo
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
     };
 

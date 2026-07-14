@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Navbar,
   Nav,
@@ -16,7 +16,25 @@ import "../styles/header.css";
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showSub, setShowSub] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    if (headerRef.current) {
+      menuOpen
+        ? headerRef.current.classList.add("menu-abierto")
+        : headerRef.current.classList.remove("menu-abierto");
+    }
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 991) setMenuOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
@@ -24,72 +42,81 @@ const Header = () => {
     }
   };
 
-  const handleClick = () => {
-    setShowSub(true);
-  };
+  const handleClick = () => setShowSub(true);
+
+  const handleNavClick = () => setMenuOpen(false);
 
   return (
-    <>
-      <Navbar expand="lg" className="py-3">
-        <Container>
-          {/* Logo */}
-          <Navbar.Brand as={NavLink} to="/" className="fw-bold fs-4">
-            <Image
-              src={logo}
-              alt="Logo RedRaiz"
-              fluid
-              className="me-2 logo-header"
-            />
-          </Navbar.Brand>
 
-          {/* Menú y elementos a la derecha */}
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
-            <Nav className="m-end gap-4 menu">
-              <Nav.Link as={NavLink} to="/" end className="fw-bold">
-                Inicio
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/productores" className="fw-bold">
-                Productores
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/catalogo" className="fw-bold">
-                Catálogo
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/blog" className="fw-bold">
-                Blog
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/contacto" className="fw-bold">
-                Contacto
-              </Nav.Link>
-            </Nav>
+    <header className="fixed-top" ref={headerRef}>
+      <div className="header" >
+        <Navbar
+          expand="lg"
+          className="py-3"
+          variant="dark"
+          expanded={menuOpen}
+          onToggle={() => setMenuOpen((prev) => !prev)}
+        >
+          <Container>
 
-            {/* Campo de búsqueda + Botón de suscripción */}
-            <div className="d-flex align-items-center ms-lg-3">
-              <InputGroup className="header-search">
-                <InputGroup.Text className="search-icon-wrapper">
-                  <i className="fas fa-search search-icon"></i>
-                </InputGroup.Text>
-                <FormControl
-                  type="text"
-                  placeholder="Buscar..."
-                  className="search-input"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                />
-              </InputGroup>
+            <Navbar.Brand as={NavLink} to="/" className="fw-bold fs-4 me-2">
+              <Image
+                src={logo}
+                alt="Logo RedRaiz"
+                fluid
+                className="logo-header"
+              />
+            </Navbar.Brand>
+            <ButtonPrimary onClick={handleClick} className="d-lg-none me-2">
+              Suscríbete
+            </ButtonPrimary>
 
-              <ButtonPrimary onClick={handleClick} className="ms-3">
-                Suscríbete
-              </ButtonPrimary>
-            </div>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+            <Navbar.Toggle aria-controls="basic-navbar-nav p-2" className="p-2" />
+            <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+              <Nav className="gap-2 gap-lg-4 pb-3 pb-lg-0 menu">
+                <Nav.Link as={NavLink} to="/" end className="fw-bold" onClick={handleNavClick}>
+                  Inicio
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/productores" className="fw-bold" onClick={handleNavClick}>
+                  Productores
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/catalogo" className="fw-bold" onClick={handleNavClick}>
+                  Catálogo
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/blog" className="fw-bold" onClick={handleNavClick}>
+                  Blog
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/contacto" className="fw-bold" onClick={handleNavClick}>
+                  Contacto
+                </Nav.Link>
+              </Nav>
 
-      {/* Modal de Suscripción */}
-      <SubscriptionModal show={showSub} onHide={() => setShowSub(false)} />
-    </>
+              <div className="d-lg-flex align-items-center ms-lg-3">
+                <InputGroup className="header-search">
+                  <InputGroup.Text className="search-icon-wrapper">
+                    <i className="fas fa-search search-icon"></i>
+                  </InputGroup.Text>
+                  <FormControl
+                    type="text"
+                    placeholder="Buscar..."
+                    className="search-input"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  />
+                </InputGroup>
+
+                <ButtonPrimary onClick={handleClick} className="d-none d-lg-block ms-3">
+                  Suscríbete
+                </ButtonPrimary>
+              </div>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+
+        <SubscriptionModal show={showSub} onHide={() => setShowSub(false)} />
+      </div>
+    </header>
   );
 };
 

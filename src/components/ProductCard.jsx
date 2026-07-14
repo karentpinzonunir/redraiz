@@ -1,4 +1,3 @@
-// src/components/ProductCard.jsx
 import React from "react";
 import { Card, Badge } from "react-bootstrap";
 import ButtonPrimary from "./ButtonPrimary";

@@ -1,4 +1,3 @@
-// src/components/ImageGallery.jsx
 import React, { useState } from "react";
 import { Modal, Carousel, Image, Button, Row, Col } from "react-bootstrap";
 import "../styles/productores.css";
@@ -23,14 +22,13 @@ const ImageGallery = ({ images = [], basePath = "/assets/productores/", folder =
 
     return (
         <>
-            {/* GRID de 12 columnas exactas sin scroll */}
-            <Row className="g-1 mt-2 flex-nowrap justify-content-center">
+            <Row className="mt-2 justify-content-center">
                 {filledImages.map((img, index) => {
                     const url = getImageUrl(img);
                     const isPlaceholder = !img;
 
                     return (
-                        <Col sm={2} key={index} className="d-flex justify-content-center">
+                        <Col xs={6} sm={3} lg={2} key={index} className="d-flex justify-content-center">
 
                             <Button
                                 variant="light"
@@ -54,7 +52,6 @@ const ImageGallery = ({ images = [], basePath = "/assets/productores/", folder =
                 })}
             </Row>
 
-            {/* Modal con Carrusel (solo para imágenes reales) */}
             <Modal show={showModal} onHide={() => setShowModal(false)} centered size="lg">
                 <Modal.Header closeButton className="bg-dark border-0">
                 </Modal.Header>

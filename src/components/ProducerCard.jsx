@@ -1,4 +1,3 @@
-// src/components/ProducerCard.jsx
 import React from "react";
 import { Card, Badge } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
@@ -18,7 +17,6 @@ const ProducerCard = ({ productor }) => {
     (productor && productor.region && productor.region.nombre) ||
     `Región ${productor?.id_region ?? "-"}`;
 
-  // Evitar que el clic en el botón redirija dos veces
   const handleButtonClick = (e) => {
     e.stopPropagation();
   };
@@ -60,7 +58,6 @@ const ProducerCard = ({ productor }) => {
           </Card.Text>
 
           <div className="mt-4">
-            {/* Botón con estilo original pero sin navegar otra vez */}
             <ButtonPrimary
               as="button"
               onClick={handleButtonClick}

@@ -1,4 +1,3 @@
-// src/pages/ProductorDetalle.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
@@ -51,7 +50,7 @@ const ProductorDetalle = () => {
 
   if (loading) {
     return (
-      <Container className="my-5 text-center">
+      <Container className="contenedor--raiz my-3 my-lg-5 text-center">
         <Spinner animation="border" variant="success" />
       </Container>
     );
@@ -59,7 +58,7 @@ const ProductorDetalle = () => {
 
   if (error) {
     return (
-      <Container className="my-5">
+      <Container className="contenedor--raiz my-3 my-lg-5">
         <Alert variant="danger">Error: {String(error)}</Alert>
       </Container>
     );
@@ -67,7 +66,7 @@ const ProductorDetalle = () => {
 
   if (!productor) {
     return (
-      <Container className="my-5">
+      <Container className="contenedor--raiz my-3 my-lg-5">
         <h2>Productor no encontrado - {id}</h2>
       </Container>
     );
@@ -77,7 +76,6 @@ const ProductorDetalle = () => {
   const lng = productor.longitud || "-74.0721";
   const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(lat + "," + lng)}&z=14&output=embed`;
 
-  // Función para scroll suave
   const scrollToProductos = () => {
     document.getElementById("seccion-productos").scrollIntoView({ behavior: "smooth" });
   };
@@ -85,8 +83,7 @@ const ProductorDetalle = () => {
   return (
     <div className="productor-detalle-page">
 
-      {/* MIGA DE PAN */}
-      <section className="pt-5">
+      <section className="pt-3 pt-lg-5">
         <Container>
           <Breadcrumb>
             <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
@@ -100,8 +97,7 @@ const ProductorDetalle = () => {
         </Container>
       </section>
 
-      {/* TÍTULO */}
-      <section className="py-5 text-center">
+      <section className="py-3 py-lg-5 text-center">
         <Container>
           <SectionTitle
             tag="Historias del campo"
@@ -112,11 +108,9 @@ const ProductorDetalle = () => {
         </Container>
       </section>
 
-      {/* INFORMACIÓN */}
-      <section className="pb-5">
+      <section className="pb-3 pb-lg-5">
         <Container>
           <Row>
-            {/* IMAGEN PRINCIPAL */}
             <Col lg={4}>
               <div className="producer-image-wrapper rounded-4">
                 {selectedImage ? (
@@ -134,7 +128,6 @@ const ProductorDetalle = () => {
               </div>
             </Col>
 
-            {/* DATOS DEL PRODUCTOR */}
             <Col lg={8} className="d-flex flex-column py-3">
               {productor.region?.nombre && (
                 <span className="section-tag">
@@ -157,8 +150,9 @@ const ProductorDetalle = () => {
                 </div>
               )}
 
-              <div className="d-flex gap-2 mt-3">
+              <div className="d-sm-flex gap-2 mt-3">
                 <ButtonPrimary
+                  className="mb-3 mb-sm-0"
                   href={`https://wa.me/${productor.telefono}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -177,8 +171,7 @@ const ProductorDetalle = () => {
         </Container>
       </section>
 
-      {/* PRODUCTOS */}
-      <section id="seccion-productos" className="py-5">
+      <section id="seccion-productos" className="py-3 py-lg-5">
         <Container>
           <SectionTitle
             tag="Productos"
@@ -210,8 +203,7 @@ const ProductorDetalle = () => {
         </Container>
       </section>
 
-      {/* MAPA */}
-      <section className="pt-5">
+      <section className="pt-3 pt-lg-5">
         <Container>
           <SectionTitle
             tag="Ubicación"
@@ -222,7 +214,7 @@ const ProductorDetalle = () => {
         </Container>
       </section>
 
-      <section className="py-5">
+      <section className="py-3 py-lg-5">
         <Container>
           <div className="rounded overflow-hidden shadow producer-detalle">
             <iframe
@@ -237,8 +229,7 @@ const ProductorDetalle = () => {
         </Container>
       </section>
 
-      {/* CONTACTO */}
-      <section className="pt-5">
+      <section className="pt-3 pt-lg-5">
         <Container>
           <ContactForm />
         </Container>

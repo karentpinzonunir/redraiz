@@ -17,26 +17,18 @@ const Contacto = () => {
   return (
     <div className="contact-page">
 
-      {/* HERO */}
       <section className="py-5">
-
         <Container>
-
           <SectionTitle
             tag="Contacto"
             title="Haz parte de RedRaíz"
             description="Conectamos productores locales con familias que valoran el trabajo del campo colombiano."
             center={true}
           />
-
         </Container>
-
       </section>
 
-      {/* FORM */}
-      
-
-          <ContactForm />
+      <ContactForm />
     </div>
   );
 };

@@ -23,7 +23,7 @@ const Blog = () => {
 
   if (loading || loadingDestacada) {
     return (
-      <Container className="my-5 text-center">
+      <Container className="my-3 my-lg-5 text-center">
         <Spinner animation="border" variant="success" />
       </Container>
     );
@@ -31,7 +31,7 @@ const Blog = () => {
 
   if (error) {
     return (
-      <Container className="my-5">
+      <Container className="my-3 my-lg-5">
         <Alert variant="danger">Error: {String(error)}</Alert>
       </Container>
     );
@@ -39,9 +39,7 @@ const Blog = () => {
 
   return (
     <div>
-
-      {/* Hero */}
-      <section className="py-5 text-center">
+      <section className="py-3 py-lg-5 text-center">
         <Container>
           <SectionTitle
             tag="Blog"
@@ -52,9 +50,8 @@ const Blog = () => {
         </Container>
       </section>
 
-      {/* Artículo destacado */}
       {destacada && (
-        <section className="pb-5">
+        <section className="pb-3 pb-lg-5">
           <Container>
             <Row className="align-items-center g-5">
               <Col lg={6}>
@@ -113,8 +110,7 @@ const Blog = () => {
         </section>
       )}
 
-      {/* Todas las historias */}
-      <section className="py-5 text-center">
+      <section className="py-3 py-lg-5 text-center">
         <Container>
           <SectionTitle
             tag="Todas las historias"

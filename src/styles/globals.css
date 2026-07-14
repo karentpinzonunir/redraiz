@@ -67,15 +67,23 @@ h3 {
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 2.5rem;
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 2.3rem;
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: 1.75rem;
+}
+
+.description-tittle {
+  font-size: 1rem;
+}
+
+.breadcrumb {
+  font-size: 0.9rem;
 }
 
 p {
@@ -89,7 +97,7 @@ p {
 
 .section-tag {
   color: var(--primary-color);
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -141,25 +149,23 @@ p {
   transform: scale(1.05);
 }
 
-.breadcrumb-item {
-  a {
-    text-decoration: none;
-    color: var(--primary-color);
-    font-family: 'Inter', sans-serif;
-    transition: transform .5s ease;
+.breadcrumb-item a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-family: 'Inter', sans-serif;
+  transition: transform .5s ease;
+}
 
-    &:hover {
-      color: var(--secondary-color);
-    }
-  }
+.breadcrumb-item a:hover {
+  color: var(--secondary-color);
 }
 
 .page-link {
   color: var(--primary-color);
+}
 
-  &:hover {
-    color: var(--secondary-color);
-  }
+.page-link:hover {
+  color: var(--secondary-color);
 }
 
 .active>.page-link {
@@ -169,4 +175,26 @@ p {
 
 .text-success-redraiz {
   color: var(--primary-color) !important;
+}
+
+@media (min-width: 992px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  .description-tittle {
+    font-size: 1.25rem;
+  }
+
+  .breadcrumb {
+    font-size: 1rem;
+  }
 }

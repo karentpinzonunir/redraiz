@@ -36,7 +36,7 @@ const HistoriaDetalle = () => {
 
   if (loading) {
     return (
-      <Container className="my-5 text-center">
+      <Container className="contenedor--raiz my-3 my-lg-5 text-center">
         <Spinner animation="border" variant="success" />
       </Container>
     );
@@ -44,7 +44,7 @@ const HistoriaDetalle = () => {
 
   if (error || !historia) {
     return (
-      <Container className="my-5">
+      <Container className="contenedor--raiz my-3 my-lg-5">
         <Alert variant="danger">Historia no encontrada.</Alert>
       </Container>
     );
@@ -52,8 +52,7 @@ const HistoriaDetalle = () => {
 
   return (
     <div>
-      {/* Miga de pan */}
-      <section className="pt-5">
+      <section className="pt-3 pt-lg-5">
         <Container>
           <Breadcrumb>
             <Breadcrumb.Item linkAs={NavLink} linkProps={{ to: "/" }}>
@@ -69,8 +68,7 @@ const HistoriaDetalle = () => {
         </Container>
       </section>
 
-      {/* Título / Hero */}
-      <section className="py-5 text-center">
+      <section className="py-3 py-lg-5 text-center">
         <Container>
           <SectionTitle
             tag="Blog"
@@ -94,8 +92,7 @@ const HistoriaDetalle = () => {
         </Container>
       </section>
 
-      {/* Imagen principal */}
-      <section className="pb-5">
+      <section className="pb-3 pb-lg-5">
         <Container>
           <Row className="justify-content-center">
             <Col lg={9}>
@@ -109,8 +106,7 @@ const HistoriaDetalle = () => {
         </Container>
       </section>
 
-      {/* Resumen */}
-      <section className="pb-4">
+      <section className="pb-2 pb-lg-4">
         <Container>
           <Row className="justify-content-center">
             <Col lg={8}>
@@ -122,8 +118,7 @@ const HistoriaDetalle = () => {
         </Container>
       </section>
 
-      {/* Contenido */}
-      <section className="pb-4">
+      <section className="pb-2 pb-lg-4">
         <Container>
           <Row className="justify-content-center">
             <Col lg={8} className="bg-white p-3 rounded-4 shadow-sm">
@@ -131,7 +126,7 @@ const HistoriaDetalle = () => {
                 ?.split("\n")
                 .filter((p) => p.trim() !== "")
                 .map((parrafo, index) => (
-                  <p key={index} className="mb-4 lh-lg">
+                  <p key={index} className="mb-2 mb-lg-4 lh-lg">
                     {parrafo}
                   </p>
                 ))}
@@ -140,12 +135,11 @@ const HistoriaDetalle = () => {
         </Container>
       </section>
 
-      {/* Comentarios */}
-      <section className="py-5">
+      <section className="py-3 py-lg-5">
         <Container>
           <Row className="justify-content-center">
             <Col lg={8}>
-              <h4 className="fw-bold mb-4">
+              <h4 className="fw-bold mb-2 mb-lg-4">
                 <i className="fa-regular fa-comments me-2 text-success-redraiz"></i>
                 Comentarios ({comentarios.length})
               </h4>
@@ -191,7 +185,6 @@ const HistoriaDetalle = () => {
                 </div>
               )}
 
-              {/* Formulario de comentario */}
               <div className="bg-white rounded-4 p-4 shadow-sm">
                 <ComentarioForm historiaId={historia.id} />
               </div>
@@ -200,8 +193,7 @@ const HistoriaDetalle = () => {
         </Container>
       </section>
 
-      {/* Más historias */}
-      <section className="py-5">
+      <section className="py-3 py-lg-5">
         <Container>
           <SectionTitle
             tag="Sigue explorando"

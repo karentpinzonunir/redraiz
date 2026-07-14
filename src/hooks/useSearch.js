@@ -1,4 +1,3 @@
-// src/hooks/useSearch.js
 import { useMemo, useState } from "react";
 
 const normalizeText = (value = "") =>
@@ -8,12 +7,7 @@ const normalizeText = (value = "") =>
         .replace(/[\u0300-\u036f]/g, "")
         .toLowerCase()
         .trim();
-
-/**
- * useSearch - hook genérico de búsqueda en arrays de objetos
- * @param {Array} data - lista de objetos
- * @param {Array} fields - campos donde buscar (ej: ['nombre','descripcion'])
- */
+        
 export const useSearch = (data = [], fields = []) => {
     const [searchTerm, setSearchTerm] = useState("");
 

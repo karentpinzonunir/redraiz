@@ -1,4 +1,3 @@
-// src/pages/Productos.jsx
 import React, { useMemo, useState } from "react";
 import {
   Row,
@@ -17,18 +16,15 @@ import { useSearch } from "../hooks/useSearch";
 import { usePagination } from "../hooks/usePagination";
 
 const Catalogo = () => {
-  // ── Datos principales ────────────────────────────────────────────
   const { data, loading, error } = useGet("/api/productor_productos");
   const { data: dataRegiones } = useGet("/api/regiones");
   const { data: dataProductores } = useGet("/api/productores");
   const { data: dataProductosTipos } = useGet("/api/productos");
 
-  // ── Filtros activos ──────────────────────────────────────────────
   const [filtroRegion, setFiltroRegion] = useState("");
   const [filtroProductor, setFiltroProductor] = useState("");
   const [filtroProducto, setFiltroProducto] = useState("");
 
-  // ── Opciones de los selects ──────────────────────────────────────
   const regiones = useMemo(
     () => (Array.isArray(dataRegiones) ? dataRegiones : []),
     [dataRegiones]
@@ -42,7 +38,6 @@ const Catalogo = () => {
     [dataProductosTipos]
   );
 
-  // ── Normalización ────────────────────────────────────────────────
   const listaRaw = useMemo(
     () =>
       Array.isArray(data?.data)
@@ -68,7 +63,6 @@ const Catalogo = () => {
     }));
   }, [listaRaw]);
 
-  // ── Búsqueda por texto ───────────────────────────────────────────
   const {
     searchTerm,
     setSearchTerm,
@@ -81,7 +75,6 @@ const Catalogo = () => {
     "region_nombre",
   ]);
 
-  // ── Filtros por select ───────────────────────────────────────────
   const filteredData = useMemo(() => {
     return searchedData.filter((item) => {
       const matchRegion = !filtroRegion || String(item.region_id) === filtroRegion;
@@ -100,7 +93,6 @@ const Catalogo = () => {
     setSearchTerm("");
   };
 
-  // ── Paginación ───────────────────────────────────────────────────
   const { currentData, currentPage, totalPages, goToPage } = usePagination(
     filteredData,
     6
@@ -108,8 +100,7 @@ const Catalogo = () => {
 
   return (
     <div>
-      {/* HERO */}
-      <section className="py-5 text-center">
+      <section className="py-3 py-lg-5 text-center">
         <Container>
           <SectionTitle
             tag="Catálogo"
@@ -120,8 +111,7 @@ const Catalogo = () => {
         </Container>
       </section>
 
-      {/* FILTROS */}
-      <section className="pb-4">
+      <section className="pb-3 pb-lg-5">
         <div className="container-custom">
           <Card className="border shadow-sm bg-secondary-subtle">
             <Card.Body>
@@ -196,8 +186,7 @@ const Catalogo = () => {
         </div>
       </section>
 
-      {/* BUSCADOR */}
-      <section className="pb-5">
+      <section className="pb-3 pb-lg-5">
         <div className="container-custom">
           <div className="mx-auto buscador">
             <InputGroup size="lg" className="shadow-sm rounded-pill overflow-hidden border">
@@ -216,23 +205,22 @@ const Catalogo = () => {
         </div>
       </section>
 
-      {/* GRID */}
-      <section className="pb-5">
+      <section className="pb-3 pb-lg-5">
         <div className="container-custom">
           {loading && (
-            <div className="text-center py-5">
+            <div className="text-center py-3 py-lg-5">
               <Spinner animation="border" variant="success" />
             </div>
           )}
 
           {error && (
-            <div className="text-center py-5 text-danger">
+            <div className="text-center py-3 py-lg-5 text-danger">
               <p>Error al cargar los productos: {String(error)}</p>
             </div>
           )}
 
           {!loading && !error && filteredData.length === 0 && (
-            <div className="text-center py-5 gray-text">
+            <div className="text-center py-3 py-lg-5 gray-text">
               <p className="fs-5">
                 No encontramos productos que coincidan con tu búsqueda.
               </p>
@@ -257,7 +245,7 @@ const Catalogo = () => {
               </Row>
 
               {filteredData.length > 6 && (
-                <div className="d-flex justify-content-center mt-5">
+                <div className="d-flex justify-content-center mt-3 mt-lg-5">
                   <Pagination>
                     <Pagination.Prev
                       disabled={currentPage === 1}

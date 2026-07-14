@@ -1,4 +1,3 @@
-// CardCarousel.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { Container, Card, Badge, Spinner } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
@@ -22,12 +21,8 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
   const trackRef = useRef(null);
   const GAP = 24;
 
-  const slides = slider?.slides ?? [];
-
-  // ── useWindowSize reemplaza el addEventListener manual ────────────
+  const slides = slider?.slides ?? [];  
   const { width } = useWindowSize();
-
-  // ── Centrar slide activo ──────────────────────────────────────────
   const recalc = () => {
     const container = containerRef.current;
     const slide = slideRef.current;
@@ -42,30 +37,23 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
     track.style.transform = `translateX(${translateX}px)`;
   };
 
-  // Se recalcula cuando cambia el índice, los slides o el ancho de ventana
   useEffect(() => {
     recalc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, slides, width]);
 
-  // Recalc inicial con pequeño delay para que el DOM esté listo
   useEffect(() => {
     setTimeout(recalc, 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── useInterval reemplaza el setInterval/clearInterval manual ─────
   useInterval(
     () => setIndex((i) => (i + 1) % slides.length),
     !isPaused && slider?.interval && slides.length > 0 ? slider.interval : null,
   );
 
-  // ── Navegación ────────────────────────────────────────────────────
   const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
   const next = () => setIndex((i) => (i + 1) % slides.length);
   const goTo = (i) => setIndex(i);
 
-  // ── Estados de carga ──────────────────────────────────────────────
   if (loading)
     return (
       <div className="d-flex justify-content-center align-items-center carrousel-home">
@@ -79,7 +67,6 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
     return <p className="text-center py-5 text-danger">Error: {error}</p>;
   if (!slider || slides.length === 0) return null;
 
-  // ── Render ────────────────────────────────────────────────────────
   return (
     <div
       className="position-relative py-3"
@@ -140,7 +127,6 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
           </div>
         </div>
 
-        {/* Controles */}
         <div className="cf-controls">
           <button
             className="cf-arrow cf-prev"
@@ -158,7 +144,6 @@ export default function CardCarousel({ id = 2, initial = 0 }) {
           </button>
         </div>
 
-        {/* Dots */}
         <div className="cf-dots">
           {slides.map((_, i) => (
             <button
